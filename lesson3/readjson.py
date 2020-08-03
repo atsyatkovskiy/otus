@@ -10,12 +10,7 @@ with open('users.json', 'r') as userfile:
 json_list = []
 for i in data:
     json_list.append({
-        "name": i['name'], "gender": i['gender'], "address": i['address'],
-        "books": {
-            "title": "Fundamentals of Wavelets",
-            "author": "Goswami, Jaideva",
-            "height": "228"
-        },
+        "name": i['name'], "gender": i['gender'], "address": i['address']
     })
 
 print(list(json_list))
@@ -26,18 +21,34 @@ with open('books.csv', newline='') as f:
     for row in reader:
         print(row['Title'], row['Author'], row['Height'])
         slov.append({
-            "books": {
                 "title": row['Title'],
                 "author": row['Author'],
                 "height": row['Height']
-            }
         })
 
-print(list(slov))
+total_books = len(slov)
 
+# total_books = len(slov)
+# total_users = len(json_list)
+#
+# print("total_users=", total_users)
+# print("total_books=", total_books)
+#
+# print(list(range(total_users)))
+
+for i in range(len(json_list)):
+    user = json_list[i]
+    if i < total_books:
+        book = slov[i]
+        user['books'] = [book]
+    else:
+        user['books'] = []
+
+# print(list(slov))
+#
 json_result = 'result.json'
 with open(json_result, "w", encoding="utf-8") as resultfile:
-    json.dump(json_list, resultfile)
+    json.dump(json_list, resultfile, indent=4)
 
 # res_dict = {}
 # for item in json_list:
