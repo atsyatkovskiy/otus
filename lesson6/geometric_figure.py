@@ -4,12 +4,6 @@ import math
 class Figure:
     area = 0
     perimeter = 0
-#
-#     def angels_num(self):
-#         if self.angels == 4:
-#             print(f'Количество углов {self.angels} это квадрат')
-#         elif self.angels == 3:
-#             print(f'Количество углов {self.angels} это квадрат')
 
 
 class Square(Figure):
@@ -22,6 +16,7 @@ class Square(Figure):
 
     def angles_num(self):
         print(f'Количество углов {self.name}а = {self.angels}')
+        return self.angels
 
     def area_square(self):
         if self.a > 0:
@@ -36,10 +31,10 @@ class Square(Figure):
             return self.perimeter
 
 
-fig = Square(6)
-fig.angles_num()
-fig.area_square()
-fig.perimeter_square()
+# fig = Square(6)
+# fig.angles_num()
+# fig.area_square()
+# fig.perimeter_square()
 
 
 class Triangle:
@@ -69,10 +64,10 @@ class Triangle:
             return self.area
 
 
-fig_triangle = Triangle(3, 4, 5)
-fig_triangle.angles_num()
-fig_triangle.perimeter_triangle()
-fig_triangle.area_triangle()
+# fig_triangle = Triangle(3, 4, 5)
+# fig_triangle.angles_num()
+# fig_triangle.perimeter_triangle()
+# fig_triangle.area_triangle()
 
 
 class Rectangle:
@@ -99,10 +94,10 @@ class Rectangle:
             return self.area
 
 
-fig_rectangle = Rectangle(3, 4)
-fig_rectangle.angles_num()
-fig_rectangle.perimeter_rectangle()
-fig_rectangle.area_rectangle()
+# fig_rectangle = Rectangle(3, 4)
+# fig_rectangle.angles_num()
+# fig_rectangle.perimeter_rectangle()
+# fig_rectangle.area_rectangle()
 
 
 class Circle(Figure):
@@ -132,9 +127,9 @@ class Circle(Figure):
         summ_area = self.area_circle() + area_other
         print("Сумма площадей = ", summ_area)
 
-
-fig_circle = Circle(3)
-fig_circle.angles_num()
-fig_circle.perimeter_circle()
-fig_circle.area_circle()
-fig_circle.add_square(fig_rectangle.area_rectangle())
+#
+# fig_circle = Circle(3)
+# fig_circle.angles_num()
+# fig_circle.perimeter_circle()
+# fig_circle.area_circle()
+#fig_circle.add_square(fig_rectangle.area_rectangle())
