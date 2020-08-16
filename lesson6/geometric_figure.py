@@ -30,6 +30,10 @@ class Square(Figure):
             print(f'периметр {self.name}а =', self.perimeter)
             return self.perimeter
 
+    @property
+    def increase_sum(self):
+        return self.a * 10
+
 
 # fig = Square(6)
 # fig.angles_num()
