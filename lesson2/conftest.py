@@ -7,17 +7,22 @@ def dict_fixture(request):
     return request.param
 
 
-@pytest.fixture(params=[[1, 2, 3], [3 , 4, 5]])
+@pytest.fixture(params=[[1, 2, 3], [3, 4, 5]])
 def list_fixture(request):
     return request.param
 
 
-@pytest.fixture
-def string_fixture():
-    print("\n===> Это фикстура 'first_fixture'")
-    return
+@pytest.fixture(params=[1, 3, 5, 8, 9])
+def list_fixture_sort(request):
+    return request.param
 
 
-@pytest.fixture(params=[22, 33, 44])
+@pytest.fixture(params="'Строка с заглавной буквы'")
+def string_fixture(request):
+    print("Строка с заглавной буквы")
+    return request.param
+
+
+@pytest.fixture(params=["hello", 33, 44])
 def sets_fixture(request):
     return request.param
