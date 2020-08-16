@@ -12,7 +12,7 @@ def test_dict_update(dict_fixture):
 
 def test_dict_len():
     a = len(person)
-    assert a == 4
+    assert a == 6
 
 
 def test_dict_popitem():
