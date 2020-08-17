@@ -5,34 +5,46 @@ class Figure:
     area = 0
     perimeter = 0
 
+    def add_square(self, other):
+        if isinstance(other, Figure):
+            return self.area + other.area
+        print("Ошибка")
+
 
 class Square(Figure):
-
     def __init__(self, a):
         self.a = a
 
     angels = 4
     name = "квадрат"
 
-    def angles_num(self):
-        print(f'Количество углов {self.name}а = {self.angels}')
-        return self.angels
-
-    def area_square(self):
-        if self.a > 0:
-            self.area = self.a ** 2
-            print(f'площадь {self.name}а =', self.area)
-            return self.area
-
-    def perimeter_square(self):
-        if self.a > 0:
-            self.perimeter = self.a * 4
-            print(f'периметр {self.name}а =', self.perimeter)
-            return self.perimeter
+    # def angles_num(self):
+    #     print(f'Количество углов {self.name}а = {self.angels}')
+    #     return self.angels
+    #
+    # def area_square(self):
+    #     if self.a > 0:
+    #         self.area = self.a ** 2
+    #         print(f'площадь {self.name}а =', self.area)
+    #         return self.area
 
     @property
-    def increase_sum(self):
-        return self.a * 10
+    def perimeter(self):
+        if self.a > 0:
+            perimeter = self.a * 4
+            print(f'периметр {self.name}а =', perimeter)
+            return perimeter
+
+    @property
+    def area(self):
+        if self.a > 0:
+            area = self.a ** 2
+            print(f'площадь {self.name}а =', area)
+            return area
+
+    # @property
+    # def increase_sum(self):
+    #     return self.a * 10
 
 
 # fig = Square(6)
@@ -66,7 +78,6 @@ class Triangle:
             self.area = per * (math.sqrt((per - self.a) * (per - self.b) * (per - self.c)))
             print(f'площадь {self.name}а =', self.area)
             return self.area
-
 
 # fig_triangle = Triangle(3, 4, 5)
 # fig_triangle.angles_num()
@@ -126,10 +137,20 @@ class Circle(Figure):
             print(f'площадь {self.name}а =', self.area)
             return self.area
 
-    def add_square(self, area_other):
-        # добавить условие, если это не геометрическая фигура, то выдать ошибку, что передан неправильный класс
-        summ_area = self.area_circle() + area_other
-        print("Сумма площадей = ", summ_area)
+    # def add_square(self, area_other):
+    #     # добавить условие, если это не геометрическая фигура, то выдать ошибку, что передан неправильный класс
+    #     summ_area = self.area_circle() + area_other
+    #     print("Сумма площадей = ", summ_area)
+
+
+if __name__ == '__main__':
+    fig1 = Circle(3)
+    print(fig1.__class__)
+    fig2 = Square(3)
+    # print(fig1.add_square(fig2))
+    # print(fig2.area)
+    print(fig1.angels)
+    print(fig2.angels)
 
 #
 # fig_circle = Circle(3)
