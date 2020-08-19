@@ -6,9 +6,9 @@ class Figure:
     perimeter = 0
 
     def adder(self, other):
-        if isinstance(self, Figure):
-            print("self.area", self.area, "other.area_func", other.area_func)
-            return self.area + other.area_func
+        if isinstance(other, Figure):
+            print("self.area", self.area, "other.area_func", other.area)
+            return self.area + other.area
         print("Ошибка")
 
 
@@ -26,18 +26,18 @@ class Square(Figure):
         return self.angels
 
     @property
-    def perimeter_func(self):
+    def perimeter(self):
         if self.a > 0:
-            self.perimeter = self.a * 4
+            perimeter = self.a * 4
             # print(f'периметр {self.name}а =', self.perimeter)
-            return self.perimeter
+            return perimeter
 
     @property
-    def area_func(self):
+    def area(self):
         if self.a > 0:
-            self.area = self.a ** 2
+            area = self.a ** 2
             # print(f'площадь {self.name}а =', self.area)
-            return self.area
+            return area
 
 # @property
 # def increase_sum(self):
@@ -70,19 +70,19 @@ class Triangle(Figure):
         return self.angels
 
     @property
-    def perimeter_func(self):
+    def perimeter(self):
         if min(self.a, self.b, self.c) > 0:
-            self.perimeter = self.a + self.b + self.c
+            perimeter = self.a + self.b + self.c
             # print(f'периметр {self.name}а =', perimeter)
-            return self.perimeter
+            return perimeter
 
     @property
-    def area_func(self):
+    def area(self):
         if min(self.a, self.b, self.c) > 0:
-            per = self.perimeter_func / 2
-            self.area = (math.sqrt(per * (per - self.a) * (per - self.b) * (per - self.c)))
+            per = self.perimeter / 2
+            area = (math.sqrt(per * (per - self.a) * (per - self.b) * (per - self.c)))
             # print(f'площадь {self.name}а =', self.area)
-            return self.area
+            return area
 
 
 class Rectangle(Figure):
@@ -104,14 +104,14 @@ class Rectangle(Figure):
         return self.angels
 
     @property
-    def perimeter_func(self):
+    def perimeter(self):
         if min(self.a, self.b) > 0:
-            perimeter = 2 * (self.a + self.b)
+            self.perimeter = 2 * (self.a + self.b)
             # print(f'периметр {self.name}а =', self.perimeter)
-            return perimeter
+            return self.perimeter
 
     @property
-    def area_func(self):
+    def area(self):
         if min(self.a, self.b) > 0:
             area = self.a * self.b
             # print(f'площадь {self.name}а =', self.area)
@@ -132,17 +132,17 @@ class Circle(Figure):
         return self.angels
 
     @property
-    def perimeter_func(self):
+    def perimeter(self):
         if self.r > 0:
             perimeter = 2 * math.pi * self.r
             # print(f'периметр {self.name}а =', self.perimeter)
             return perimeter
 
     @property
-    def area_func(self):
+    def area(self):
         if self.r > 0:
             area = math.pi * (self.r ** 2)
-            print(f'площадь {self.name}а =', self.area)
+            # print(f'площадь {self.name}а =', self.area)
             return area
 
 #     def add_square(self, area_other):
@@ -155,19 +155,28 @@ if __name__ == '__main__':
     fig1 = Square(5)
     # print(fig1.angles_num)
     # print(fig1.perimeter_func)
-    print(fig1.area_func)
+    print(fig1.area)
 
     fig2 = Triangle(5, 4, 3)
     #fig2 = Triangle(6, 3, 4)
 
     # print(fig2.angles_num)
     # print(fig2.perimeter_func)
-    print(fig2.area_func)
+    print(fig2.area)
 
     fig3 = Rectangle(5, 6)
     # print(fig3.perimeter_func)
     # print(fig3.area_func)
     # print(fig3.angles_num)
 
+    fig4 = Circle(5)
+    # print(fig4.perimeter_func)
+    # print(fig4.area_func)
+    # print(fig4.angles_num)
+
     print(fig1.adder(fig2))
     print(fig2.adder(fig1))
+    print(fig3.adder(fig1))
+    print(fig2.adder(fig3))
+    print(fig4.adder(fig1))
+    print(fig2.adder(fig4))
