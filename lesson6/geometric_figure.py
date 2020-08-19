@@ -5,56 +5,46 @@ class Figure:
     area = 0
     perimeter = 0
 
-    def add_square(self, other):
-        if isinstance(other, Figure):
-            return self.area + other.area
+    def adder(self, other):
+        if isinstance(self, Figure):
+            print("self.area", self.area, "other.area_func", other.area_func)
+            return self.area + other.area_func
         print("Ошибка")
 
 
 class Square(Figure):
+
     def __init__(self, a):
         self.a = a
 
     angels = 4
     name = "квадрат"
 
-    # def angles_num(self):
-    #     print(f'Количество углов {self.name}а = {self.angels}')
-    #     return self.angels
-    #
-    # def area_square(self):
-    #     if self.a > 0:
-    #         self.area = self.a ** 2
-    #         print(f'площадь {self.name}а =', self.area)
-    #         return self.area
+    @property
+    def angles_num(self):
+        # print(f'Количество углов {self.name}а = {self.angels}')
+        return self.angels
 
     @property
-    def perimeter(self):
+    def perimeter_func(self):
         if self.a > 0:
-            perimeter = self.a * 4
-            print(f'периметр {self.name}а =', perimeter)
-            return perimeter
+            self.perimeter = self.a * 4
+            # print(f'периметр {self.name}а =', self.perimeter)
+            return self.perimeter
 
     @property
-    def area(self):
+    def area_func(self):
         if self.a > 0:
-            area = self.a ** 2
-            print(f'площадь {self.name}а =', area)
-            return area
+            self.area = self.a ** 2
+            # print(f'площадь {self.name}а =', self.area)
+            return self.area
 
-    # @property
-    # def increase_sum(self):
-    #     return self.a * 10
-
-
-# fig = Square(6)
-# fig.angles_num()
-# fig.area_square()
-# fig.perimeter_square()
+# @property
+# def increase_sum(self):
+#     return self.a * 10
 
 
-class Triangle:
-
+class Triangle(Figure):
     def __init__(self, a, b, c):
         self.a = a
         self.b = b
@@ -63,29 +53,39 @@ class Triangle:
     angels = 3
     name = "треугольник"
 
+    # def validate(self):
+    #     if min(self.a, self.b, self.c) > 0:
+    #         if self.a + self.b > self.c:
+    #             pass
+    #         elif self.a + self.c > self.b:
+    #             pass
+    #         elif self.b + self.c > self.a:
+    #             pass
+    #         raise ValueError("Ошибка: сумма длин каждых двух сторон должна быть больше длины третьей стороны")
+    #     raise ValueError("Ошибка, отрицательное значение или 0")
+
+    @property
     def angles_num(self):
-        print(f'Количество углов {self.name}а = {self.angels}')
+        # print(f'Количество углов {self.name}а = {self.angels}')
+        return self.angels
 
-    def perimeter_triangle(self):
-        if self.a and self.b and self.c > 0:
+    @property
+    def perimeter_func(self):
+        if min(self.a, self.b, self.c) > 0:
             self.perimeter = self.a + self.b + self.c
-            print(f'периметр {self.name}а =', self.perimeter)
-            return self.perimeter / 2
+            # print(f'периметр {self.name}а =', perimeter)
+            return self.perimeter
 
-    def area_triangle(self):
-        if self.a and self.b and self.c > 0:
-            per = self.perimeter_triangle()
-            self.area = per * (math.sqrt((per - self.a) * (per - self.b) * (per - self.c)))
-            print(f'площадь {self.name}а =', self.area)
+    @property
+    def area_func(self):
+        if min(self.a, self.b, self.c) > 0:
+            per = self.perimeter_func / 2
+            self.area = (math.sqrt(per * (per - self.a) * (per - self.b) * (per - self.c)))
+            # print(f'площадь {self.name}а =', self.area)
             return self.area
 
-# fig_triangle = Triangle(3, 4, 5)
-# fig_triangle.angles_num()
-# fig_triangle.perimeter_triangle()
-# fig_triangle.area_triangle()
 
-
-class Rectangle:
+class Rectangle(Figure):
 
     def __init__(self, a, b):
         self.a = a
@@ -94,25 +94,28 @@ class Rectangle:
     angels = 4
     name = "прямоугольник"
 
+    # def validate(self):
+    #     if self.a == self.b:
+    #         print("Ошибка: стороны не должны быть равны")
+
+    @property
     def angles_num(self):
-        print(f'Количество углов {self.name}а = {self.angels}')
+        # print(f'Количество углов {self.name}а = {self.angels}')
+        return self.angels
 
-    def perimeter_rectangle(self):
-        if self.a and self.b > 0:
-            self.perimeter = 2 * (self.a + self.b)
-            print(f'периметр {self.name}а =', self.perimeter)
+    @property
+    def perimeter_func(self):
+        if min(self.a, self.b) > 0:
+            perimeter = 2 * (self.a + self.b)
+            # print(f'периметр {self.name}а =', self.perimeter)
+            return perimeter
 
-    def area_rectangle(self):
-        if self.a and self.b > 0:
-            self.area = self.a * self.b
-            print(f'площадь {self.name}а =', self.area)
-            return self.area
-
-
-# fig_rectangle = Rectangle(3, 4)
-# fig_rectangle.angles_num()
-# fig_rectangle.perimeter_rectangle()
-# fig_rectangle.area_rectangle()
+    @property
+    def area_func(self):
+        if min(self.a, self.b) > 0:
+            area = self.a * self.b
+            # print(f'площадь {self.name}а =', self.area)
+            return area
 
 
 class Circle(Figure):
@@ -123,38 +126,48 @@ class Circle(Figure):
     angels = 0
     name = "круг"
 
+    @property
     def angles_num(self):
         print(f'Количество углов {self.name}а = {self.angels}')
+        return self.angels
 
-    def perimeter_circle(self):
+    @property
+    def perimeter_func(self):
         if self.r > 0:
-            self.perimeter = 2 * math.pi * self.r
-            print(f'периметр {self.name}а =', self.perimeter)
+            perimeter = 2 * math.pi * self.r
+            # print(f'периметр {self.name}а =', self.perimeter)
+            return perimeter
 
-    def area_circle(self):
+    @property
+    def area_func(self):
         if self.r > 0:
-            self.area = math.pi * (self.r ** 2)
+            area = math.pi * (self.r ** 2)
             print(f'площадь {self.name}а =', self.area)
-            return self.area
+            return area
 
-    # def add_square(self, area_other):
-    #     # добавить условие, если это не геометрическая фигура, то выдать ошибку, что передан неправильный класс
-    #     summ_area = self.area_circle() + area_other
-    #     print("Сумма площадей = ", summ_area)
+#     def add_square(self, area_other):
+#         # добавить условие, если это не геометрическая фигура, то выдать ошибку, что передан неправильный класс
+#         summ_area = self.area_circle() + area_other
+#         print("Сумма площадей = ", summ_area)
 
 
 if __name__ == '__main__':
-    fig1 = Circle(3)
-    print(fig1.__class__)
-    fig2 = Square(3)
-    # print(fig1.add_square(fig2))
-    # print(fig2.area)
-    print(fig1.angels)
-    print(fig2.angels)
+    fig1 = Square(5)
+    # print(fig1.angles_num)
+    # print(fig1.perimeter_func)
+    print(fig1.area_func)
 
-#
-# fig_circle = Circle(3)
-# fig_circle.angles_num()
-# fig_circle.perimeter_circle()
-# fig_circle.area_circle()
-#fig_circle.add_square(fig_rectangle.area_rectangle())
+    fig2 = Triangle(5, 4, 3)
+    #fig2 = Triangle(6, 3, 4)
+
+    # print(fig2.angles_num)
+    # print(fig2.perimeter_func)
+    print(fig2.area_func)
+
+    fig3 = Rectangle(5, 6)
+    # print(fig3.perimeter_func)
+    # print(fig3.area_func)
+    # print(fig3.angles_num)
+
+    print(fig1.adder(fig2))
+    print(fig2.adder(fig1))
