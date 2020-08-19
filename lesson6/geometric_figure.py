@@ -11,9 +11,6 @@ class Figure:
             return self.area + other.area
         print("Ошибка")
 
-    # def hz(self):
-    #     print(self.perimeter, self.area, )
-
 
 class Square(Figure):
 
@@ -65,6 +62,17 @@ class Triangle(Figure):
     #         elif self.b + self.c > self.a:
     #             pass
 
+    # def validate(self):
+    #     if (self.a + self.b) > self.c:
+    #         return True
+    #     elif (self.a + self.c) > self.b:
+    #         return True
+    #     elif (self.b + self.c) > self.a:
+    #         return True
+
+        # if min(self.a, self.b, self.c) > 0:
+        #     return True
+
     @property
     def angles_num(self):
         # print(f'Количество углов {self.name}а = {self.angels}')
@@ -76,6 +84,13 @@ class Triangle(Figure):
             perimeter = self.a + self.b + self.c
             # print(f'периметр {self.name}а =', perimeter)
             return perimeter
+
+    # @property
+    # def perimeter(self):
+    #     if min(self.a, self.b, self.c) > 0:
+    #         perimeter = self.a + self.b + self.c
+    #         # print(f'периметр {self.name}а =', perimeter)
+    #         return perimeter
 
     @property
     def area(self):
@@ -154,28 +169,29 @@ class Circle(Figure):
 
 if __name__ == '__main__':
     fig1 = Square(5)
-    print(fig1.angles_num)
-    print(fig1.perimeter)
-    print(fig1.area)
+    # print(fig1.angles_num)
+    # print(fig1.perimeter)
+    # print(fig1.area)
 
-    fig2 = Triangle(5, 4, 3)
+    fig2 = Triangle(2, 3, 5)
     #fig2 = Triangle(6, 3, 4)
 
-    print(fig2.angles_num)
-    print(fig2.perimeter)
-    print(fig2.area)
+    # print(fig2.angles_num)
+    # print(fig2.perimeter)
+    # print(fig2.area)
+    # print(fig2.validate())
 
     fig3 = Rectangle(5, 6)
-    print(fig3.perimeter)
-    print(fig3.area)
-    print(fig3.angles_num)
+    # print(fig3.perimeter)
+    # print(fig3.area)
+    # print(fig3.angles_num)
 
     fig4 = Circle(5)
-    print(fig4.perimeter)
-    print(fig4.area)
-    print(fig4.angles_num)
+    # print(fig4.perimeter)
+    # print(fig4.area)
+    # print(fig4.angles_num)
 
-    print(fig1.adder(fig2, fig2))
+    # print(fig1.adder(fig2, fig2))
     # print(fig2.adder(fig1))
     # print(fig3.adder(fig1))
     # print(fig2.adder(fig3))
