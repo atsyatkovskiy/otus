@@ -5,11 +5,14 @@ class Figure:
     area = 0
     perimeter = 0
 
-    def adder(self, other):
+    def adder(self, other, other2):
         if isinstance(other, Figure):
-            print("self.area", self.area, "other.area_func", other.area)
+            print("self.area", self.area, "other.area_func", other.area, "other.perimeter", other2.perimeter)
             return self.area + other.area
         print("Ошибка")
+
+    # def hz(self):
+    #     print(self.perimeter, self.area, )
 
 
 class Square(Figure):
@@ -61,8 +64,6 @@ class Triangle(Figure):
     #             pass
     #         elif self.b + self.c > self.a:
     #             pass
-    #         raise ValueError("Ошибка: сумма длин каждых двух сторон должна быть больше длины третьей стороны")
-    #     raise ValueError("Ошибка, отрицательное значение или 0")
 
     @property
     def angles_num(self):
@@ -106,9 +107,9 @@ class Rectangle(Figure):
     @property
     def perimeter(self):
         if min(self.a, self.b) > 0:
-            self.perimeter = 2 * (self.a + self.b)
+            perimeter = 2 * (self.a + self.b)
             # print(f'периметр {self.name}а =', self.perimeter)
-            return self.perimeter
+            return perimeter
 
     @property
     def area(self):
@@ -128,7 +129,7 @@ class Circle(Figure):
 
     @property
     def angles_num(self):
-        print(f'Количество углов {self.name}а = {self.angels}')
+        # print(f'Количество углов {self.name}а = {self.angels}')
         return self.angels
 
     @property
@@ -153,30 +154,41 @@ class Circle(Figure):
 
 if __name__ == '__main__':
     fig1 = Square(5)
-    # print(fig1.angles_num)
-    # print(fig1.perimeter_func)
+    print(fig1.angles_num)
+    print(fig1.perimeter)
     print(fig1.area)
 
     fig2 = Triangle(5, 4, 3)
     #fig2 = Triangle(6, 3, 4)
 
-    # print(fig2.angles_num)
-    # print(fig2.perimeter_func)
+    print(fig2.angles_num)
+    print(fig2.perimeter)
     print(fig2.area)
 
     fig3 = Rectangle(5, 6)
-    # print(fig3.perimeter_func)
-    # print(fig3.area_func)
-    # print(fig3.angles_num)
+    print(fig3.perimeter)
+    print(fig3.area)
+    print(fig3.angles_num)
 
     fig4 = Circle(5)
-    # print(fig4.perimeter_func)
-    # print(fig4.area_func)
-    # print(fig4.angles_num)
+    print(fig4.perimeter)
+    print(fig4.area)
+    print(fig4.angles_num)
 
-    print(fig1.adder(fig2))
-    print(fig2.adder(fig1))
-    print(fig3.adder(fig1))
-    print(fig2.adder(fig3))
-    print(fig4.adder(fig1))
-    print(fig2.adder(fig4))
+    print(fig1.adder(fig2, fig2))
+    # print(fig2.adder(fig1))
+    # print(fig3.adder(fig1))
+    # print(fig2.adder(fig3))
+    # print(fig4.adder(fig1))
+    # print(fig2.adder(fig4))
+
+    # def validate(self):
+    #     if min(self.a, self.b, self.c) > 0:
+    #         if self.a + self.b > self.c:
+    #             pass
+    #         elif self.a + self.c > self.b:
+    #             pass
+    #         elif self.b + self.c > self.a:
+    #             pass
+    #         raise ValueError("Ошибка: сумма длин каждых двух сторон должна быть больше длины третьей стороны")
+    #     raise ValueError("Ошибка, отрицательное значение или 0")
