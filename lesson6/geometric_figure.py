@@ -7,9 +7,10 @@ class Figure:
 
     def adder(self, other):
         if isinstance(other, Figure):
-            print("self.area", self.area, "other.area", other.area)
+            # print("self.area", self.area, "other.area", other.area)
             return self.area + other.area
         print("Ошибка: не экземпляр класса Figure")
+        return False
 
 
 class Square(Figure):
@@ -21,20 +22,27 @@ class Square(Figure):
     name = "Square"
 
     @property
+    def validate(self):
+        if self.a > 0:
+            return True
+        print("Ошибка: отрицательное значение или 0")
+        return False
+
+    @property
     def angles_num(self):
         # print(f'angles {self.name} = {self.angels}')
         return self.angels
 
     @property
     def perimeter(self):
-        if self.a > 0:
+        if self.validate:
             perimeter = self.a * 4
             # print(f'perimeter {self.name} =', self.perimeter)
             return perimeter
 
     @property
     def area(self):
-        if self.a > 0:
+        if self.validate:
             area = self.a ** 2
             # print(f'area {self.name} =', self.area)
             return area
@@ -54,6 +62,7 @@ class Triangle(Figure):
     angels = 3
     name = "Triangle"
 
+    @property
     def validate(self):
         if min(self.a, self.b, self.c) > 0:
             if (self.a + self.c) > self.b:
@@ -72,14 +81,14 @@ class Triangle(Figure):
 
     @property
     def perimeter(self):
-        if self.validate():
+        if self.validate:
             perimeter = self.a + self.b + self.c
             # print(f'perimeter {self.name} =', perimeter)
             return perimeter
 
     @property
     def area(self):
-        if self.validate():
+        if self.validate:
             per = self.perimeter / 2
             area = (math.sqrt(per * (per - self.a) * (per - self.b) * (per - self.c)))
             # print(f'area {self.name} =', self.area)
@@ -95,6 +104,7 @@ class Rectangle(Figure):
     angels = 4
     name = "Rectangle"
 
+    @property
     def validate(self):
         if self.a != self.b:
             if min(self.a, self.b) > 0:
@@ -111,14 +121,14 @@ class Rectangle(Figure):
 
     @property
     def perimeter(self):
-        if self.validate():
+        if self.validate:
             perimeter = 2 * (self.a + self.b)
             # print(f'perimeter {self.name} =', self.perimeter)
             return perimeter
 
     @property
     def area(self):
-        if self.validate():
+        if self.validate:
             area = self.a * self.b
             # print(f'area {self.name} =', self.area)
             return area
@@ -132,6 +142,7 @@ class Circle(Figure):
     angels = 0
     name = "Circle"
 
+    @property
     def validate(self):
         if self.r > 0:
             return True
@@ -158,37 +169,32 @@ class Circle(Figure):
             return area
 
 
-#     def add_square(self, area_other):
-#         # добавить условие, если это не геометрическая фигура, то выдать ошибку, что передан неправильный класс
-#         summ_area = self.area_circle() + area_other
-#         print("Сумма площадей = ", summ_area)
-
 
 if __name__ == '__main__':
-    fig1 = Square(5)
+    # fig1 = Square(5)
     # print(fig1.angles_num)
     # print(fig1.perimeter)
     # print(fig1.area)
 
-    # fig2 = Triangle(2, 3, 4)
-    fig2 = Triangle(2, 5, 6)
+    fig2 = Triangle(2, 3, 4)
+    # fig2 = Triangle(2, 4, 5)
 
     # print(fig2.angles_num)
     # print(fig2.perimeter)
-    # print(fig2.area)
-    # print(fig2.validate())
+    print(fig2.area)
+    # print(fig2.validate)
 
-    fig3 = Rectangle(6, 7)
+    # fig3 = Rectangle(6, 7)
     # print(fig3.perimeter)
     # print(fig3.area)
     # print(fig3.angles_num)
-    # print(fig3.validate())
+    # print(fig3.validate)
 
-    fig4 = Circle(10)
+    # fig4 = Circle(10)
     # print(fig4.perimeter)
     # print(fig4.area)
     # print(fig4.angles_num)
-    # print(fig4.validate())
+    # print(fig4.validate)
 
     # print(fig1.adder(fig2))
     # print(fig2.adder(fig1))
@@ -199,6 +205,5 @@ if __name__ == '__main__':
     # print(fig4.adder(fig1))
     # print(fig2.adder(fig4))
 
+    # raise ValueError("Ошибка: сумма длин каждых двух сторон должна быть больше длины третьей стороны")
 
-    #         raise ValueError("Ошибка: сумма длин каждых двух сторон должна быть больше длины третьей стороны")
-    #      raise ValueError("Ошибка, отрицательное значение или 0")
