@@ -5,11 +5,11 @@ class Figure:
     area = 0
     perimeter = 0
 
-    def adder(self, other, other2):
+    def adder(self, other):
         if isinstance(other, Figure):
-            print("self.area", self.area, "other.area_func", other.area, "other.perimeter", other2.perimeter)
+            print("self.area", self.area, "other.area", other.area)
             return self.area + other.area
-        print("Ошибка")
+        print("Ошибка: не экземпляр класса Figure")
 
 
 class Square(Figure):
@@ -18,26 +18,27 @@ class Square(Figure):
         self.a = a
 
     angels = 4
-    name = "квадрат"
+    name = "Square"
 
     @property
     def angles_num(self):
-        # print(f'Количество углов {self.name}а = {self.angels}')
+        # print(f'angles {self.name} = {self.angels}')
         return self.angels
 
     @property
     def perimeter(self):
         if self.a > 0:
             perimeter = self.a * 4
-            # print(f'периметр {self.name}а =', self.perimeter)
+            # print(f'perimeter {self.name} =', self.perimeter)
             return perimeter
 
     @property
     def area(self):
         if self.a > 0:
             area = self.a ** 2
-            # print(f'площадь {self.name}а =', self.area)
+            # print(f'area {self.name} =', self.area)
             return area
+
 
 # @property
 # def increase_sum(self):
@@ -51,53 +52,37 @@ class Triangle(Figure):
         self.c = c
 
     angels = 3
-    name = "треугольник"
+    name = "Triangle"
 
-    # def validate(self):
-    #     if min(self.a, self.b, self.c) > 0:
-    #         if self.a + self.b > self.c:
-    #             pass
-    #         elif self.a + self.c > self.b:
-    #             pass
-    #         elif self.b + self.c > self.a:
-    #             pass
-
-    # def validate(self):
-    #     if (self.a + self.b) > self.c:
-    #         return True
-    #     elif (self.a + self.c) > self.b:
-    #         return True
-    #     elif (self.b + self.c) > self.a:
-    #         return True
-
-        # if min(self.a, self.b, self.c) > 0:
-        #     return True
+    def validate(self):
+        if min(self.a, self.b, self.c) > 0:
+            if (self.a + self.c) > self.b:
+                if (self.a + self.b) > self.c:
+                    if (self.b + self.c) > self.a:
+                        return True
+            print("Ошибка: сумма длин каждых двух сторон должна быть больше длины третьей стороны")
+            return False
+        print("Ошибка: отрицательное значение или 0")
+        return False
 
     @property
     def angles_num(self):
-        # print(f'Количество углов {self.name}а = {self.angels}')
+        # print(f'angles {self.name} = {self.angels}')
         return self.angels
 
     @property
     def perimeter(self):
-        if min(self.a, self.b, self.c) > 0:
+        if self.validate():
             perimeter = self.a + self.b + self.c
-            # print(f'периметр {self.name}а =', perimeter)
+            # print(f'perimeter {self.name} =', perimeter)
             return perimeter
-
-    # @property
-    # def perimeter(self):
-    #     if min(self.a, self.b, self.c) > 0:
-    #         perimeter = self.a + self.b + self.c
-    #         # print(f'периметр {self.name}а =', perimeter)
-    #         return perimeter
 
     @property
     def area(self):
-        if min(self.a, self.b, self.c) > 0:
+        if self.validate():
             per = self.perimeter / 2
             area = (math.sqrt(per * (per - self.a) * (per - self.b) * (per - self.c)))
-            # print(f'площадь {self.name}а =', self.area)
+            # print(f'area {self.name} =', self.area)
             return area
 
 
@@ -108,29 +93,34 @@ class Rectangle(Figure):
         self.b = b
 
     angels = 4
-    name = "прямоугольник"
+    name = "Rectangle"
 
-    # def validate(self):
-    #     if self.a == self.b:
-    #         print("Ошибка: стороны не должны быть равны")
+    def validate(self):
+        if self.a != self.b:
+            if min(self.a, self.b) > 0:
+                return True
+            print("Ошибка: отрицательное значение или 0")
+            return False
+        print("Ошибка: стороны не могут быть равны")
+        return False
 
     @property
     def angles_num(self):
-        # print(f'Количество углов {self.name}а = {self.angels}')
+        # print(f'angles {self.name} = {self.angels}')
         return self.angels
 
     @property
     def perimeter(self):
-        if min(self.a, self.b) > 0:
+        if self.validate():
             perimeter = 2 * (self.a + self.b)
-            # print(f'периметр {self.name}а =', self.perimeter)
+            # print(f'perimeter {self.name} =', self.perimeter)
             return perimeter
 
     @property
     def area(self):
-        if min(self.a, self.b) > 0:
+        if self.validate():
             area = self.a * self.b
-            # print(f'площадь {self.name}а =', self.area)
+            # print(f'area {self.name} =', self.area)
             return area
 
 
@@ -140,26 +130,33 @@ class Circle(Figure):
         self.r = r
 
     angels = 0
-    name = "круг"
+    name = "Circle"
+
+    def validate(self):
+        if self.r > 0:
+            return True
+        print("Ошибка: отрицательное значение или 0")
+        return False
 
     @property
     def angles_num(self):
-        # print(f'Количество углов {self.name}а = {self.angels}')
+        # print(f'angles {self.name} = {self.angels}')
         return self.angels
 
     @property
     def perimeter(self):
-        if self.r > 0:
+        if self.validate:
             perimeter = 2 * math.pi * self.r
-            # print(f'периметр {self.name}а =', self.perimeter)
+            # print(f'perimeter {self.name} =', self.perimeter)
             return perimeter
 
     @property
     def area(self):
-        if self.r > 0:
+        if self.validate:
             area = math.pi * (self.r ** 2)
-            # print(f'площадь {self.name}а =', self.area)
+            # print(f'area {self.name} =', self.area)
             return area
+
 
 #     def add_square(self, area_other):
 #         # добавить условие, если это не геометрическая фигура, то выдать ошибку, что передан неправильный класс
@@ -173,38 +170,35 @@ if __name__ == '__main__':
     # print(fig1.perimeter)
     # print(fig1.area)
 
-    fig2 = Triangle(2, 3, 5)
-    #fig2 = Triangle(6, 3, 4)
+    # fig2 = Triangle(2, 3, 4)
+    fig2 = Triangle(2, 5, 6)
 
     # print(fig2.angles_num)
     # print(fig2.perimeter)
     # print(fig2.area)
     # print(fig2.validate())
 
-    fig3 = Rectangle(5, 6)
+    fig3 = Rectangle(6, 7)
     # print(fig3.perimeter)
     # print(fig3.area)
     # print(fig3.angles_num)
+    # print(fig3.validate())
 
-    fig4 = Circle(5)
+    fig4 = Circle(10)
     # print(fig4.perimeter)
     # print(fig4.area)
     # print(fig4.angles_num)
+    # print(fig4.validate())
 
-    # print(fig1.adder(fig2, fig2))
+    # print(fig1.adder(fig2))
     # print(fig2.adder(fig1))
+    # print(fig1.adder(fig3))
     # print(fig3.adder(fig1))
     # print(fig2.adder(fig3))
+    # print(fig3.adder(fig4))
     # print(fig4.adder(fig1))
     # print(fig2.adder(fig4))
 
-    # def validate(self):
-    #     if min(self.a, self.b, self.c) > 0:
-    #         if self.a + self.b > self.c:
-    #             pass
-    #         elif self.a + self.c > self.b:
-    #             pass
-    #         elif self.b + self.c > self.a:
-    #             pass
+
     #         raise ValueError("Ошибка: сумма длин каждых двух сторон должна быть больше длины третьей стороны")
-    #     raise ValueError("Ошибка, отрицательное значение или 0")
+    #      raise ValueError("Ошибка, отрицательное значение или 0")
