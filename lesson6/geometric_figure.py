@@ -48,11 +48,6 @@ class Square(Figure):
             return area
 
 
-# @property
-# def increase_sum(self):
-#     return self.a * 10
-
-
 class Triangle(Figure):
     def __init__(self, a, b, c):
         self.a = a
@@ -170,18 +165,18 @@ class Circle(Figure):
 
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # fig1 = Square(5)
     # print(fig1.angles_num)
     # print(fig1.perimeter)
     # print(fig1.area)
 
-    fig2 = Triangle(2, 3, 4)
+    # fig2 = Triangle(2, 3, 4)
     # fig2 = Triangle(2, 4, 5)
 
     # print(fig2.angles_num)
     # print(fig2.perimeter)
-    print(fig2.area)
+    # print(fig2.area)
     # print(fig2.validate)
 
     # fig3 = Rectangle(6, 7)
