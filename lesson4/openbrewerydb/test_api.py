@@ -7,37 +7,47 @@ from jsonschema import validate
 # Get Brewery
 # https://api.openbrewerydb.org/breweries/5494
 @pytest.mark.parametrize('input_id_brewery', [100, 432, 551, 1012])
-#@pytest.mark.parametrize('input_id_brewery, output_id_brewery', [("100", '100'), ("55", '55'), ("2121", '2121')])
-def test_posts_get(api_client, input_id_brewery):
-#def test_get_brewery(api_client, id_brewery):
-    # response = api_client.get(path="/breweries/", params={'id': input_id_brewery})
+def test_breweries_get(api_client, input_id_brewery):
     response = api_client.get("/breweries/" + str(input_id_brewery))
-    # print(response)
-    # print(len(response.json()))
-    print(response.json())
-    print(input_id_brewery)
     assert response.json()["id"] == input_id_brewery
-    # print(response.text)
-    # print(response.status_code)
-    # print(response.json()["examples"])
     assert response.status_code == 200
     # assert response.json()["status"] == "success"
     # validate(instance=response.json(), schema=schema)
 
 
-# Search, Get Brewery (проверка поиска по значению)
-# https://api.openbrewerydb.org/breweries/search?query=dog
-@pytest.mark.parametrize('input_value', ["Colorado", "California"])
-def test_posts_get(api_client, input_value):
-    response = api_client.get("/breweries/search?query=" + str(input_value))
-    # print(response)
-    # print(len(response.json()))
-    print(response.json())
-    print(input_value)
+# Get Brewery, no valid id
+# https://api.openbrewerydb.org/breweries/5494
+@pytest.mark.parametrize('input_id_brewery', [-100, 444432, "&", 0])
+def test_breweries_no_valid_get(api_client, input_id_brewery):
+    response = api_client.get("/breweries/" + str(input_id_brewery))
+    data = {"message": f"Couldn't find Brewery with 'id'={input_id_brewery}"}
+    assert response.json() == data
+    assert response.status_code == 404
+
+
+# Filter breweries by name, Get
+# https://api.openbrewerydb.org/breweries?by_name=cooper
+@pytest.mark.parametrize('by_name', ['moscow', 'cooper'])
+def test_filter_name_get(api_client, by_name):
+    response = api_client.get(path="/breweries",
+                              params={'by_name': by_name})
     # assert response.json()["id"] == input_id_brewery
-    # print(response.text)
-    # print(response.status_code)
+    print(response.json())
     assert response.status_code == 200
+    # assert response.json()["status"] == "success"
+    # validate(instance=response.json(), schema=schema)
+
+
+# Filter by type of brewery, Get
+# https://api.openbrewerydb.org/breweries?by_type=micro
+@pytest.mark.parametrize('by_type', ['micro', 'regional', 'brewpub', 'large',
+                                     'planning', 'contract', 'proprietor'])
+def test_posts2_get(api_client, by_type):
+    response = api_client.get(path="/breweries",
+                              params={'by_type': by_type})
+    random_num = random.randint(1, 5)
+    assert response.json()[random_num]["brewery_type"] == str(by_type)
+    # assert response.status_code == 200
     # validate(instance=response.json(), schema=schema)
 
 # def test_list_all_get(api_client):
