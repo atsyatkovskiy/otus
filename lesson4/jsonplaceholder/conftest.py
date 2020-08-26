@@ -27,7 +27,7 @@ def pytest_addoption(parser):
     parser.addoption("--url", default="https://jsonplaceholder.typicode.com")
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def api_client(request):
     base_url = request.config.getoption("--url")
     return APIClient(base_address=base_url)

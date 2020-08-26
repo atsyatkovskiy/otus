@@ -48,6 +48,7 @@ def test_list_sub_breed_get(api_client):
     #     count_message += 1
     #     print(count_message, i, type(i))
     # print("Число =", count_message)
+    print(response.json())
     assert response.status_code == 200
     assert response.json()["status"] == "success"
     validate(instance=response.json(), schema=schema)
