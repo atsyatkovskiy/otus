@@ -1,11 +1,8 @@
 import pytest
 import requests
 
+
 class APIClient:
-    """
-    Упрощенный клиент для работы с API
-    Инициализируется базовым url на который пойдут запросы
-    """
 
     def __init__(self, base_address):
         self.base_address = base_address

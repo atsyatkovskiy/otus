@@ -18,10 +18,7 @@ def test_posts_get(api_client, input_id, output_id):
     response = api_client.get(path="/posts",
                               params={'id': input_id})
     res_json = response.json()
-#    print(len(res_json))
     assert res_json[0]['id'] == int(output_id)
-#    print(response.text)
-#    print("status_code =", response.status_code)
     assert response.status_code == 200
 
 

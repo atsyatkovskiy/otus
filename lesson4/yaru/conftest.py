@@ -2,7 +2,7 @@ import pytest
 import requests
 
 
-def pytest_addoption(parser): # набрасываем аргументы
+def pytest_addoption(parser):
     parser.addoption(
         "--url",
         default="https://ya.ru/sfhfhfhfhfhfhfhfh",
