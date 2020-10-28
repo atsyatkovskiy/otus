@@ -1,6 +1,7 @@
 import pytest
 from selenium.webdriver import ChromeOptions, FirefoxOptions, IeOptions
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 def pytest_addoption(parser):
@@ -13,6 +14,7 @@ def browser(request):
     # Сбор параметров запуска для pytest
     browser = request.config.getoption("--browser")
     url = request.config.getoption("--url")
+
     # Инициализация нужного объекта
     # drivers = "/Users/mikhail/Downloads/drivers"
     if browser == "chrome":
@@ -40,6 +42,12 @@ def browser(request):
     driver.url = url
     # Выдача драйвера из фикстуры
     return driver
+
+
+@pytest.fixture
+def wait(browser):
+    wait = WebDriverWait(browser, 10)
+    yield wait
 
 # def highlight(browser):
 #     element = browser.find_element(By.CSS_SELECTOR, "#input-sort")

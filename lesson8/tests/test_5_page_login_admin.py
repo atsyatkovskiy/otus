@@ -3,65 +3,51 @@ from selenium.webdriver.common.by import By
 
 
 # Проверка title загруженной страницы
-# localhost/index.php?route=account/login
-def test_account_login_page_title(browser):
-    browser.get(browser.url + "/index.php?route=account/login")
-    assert "Account Login" in browser.title
+# localhost/admin/
+def test_admin_page_title(browser):
+    browser.get(browser.url + "/admin/")
+    assert "Administration" in browser.title
 
 
-# Проверка "New Customer", и button Сontinue
-# localhost/index.php?route=account/login
-def test_account_login_page_new_customer(browser):
-    browser.get(browser.url + "/index.php?route=account/login")
-    new_customer = browser.find_element_by_css_selector("#content > div > div:nth-child(1) > div > h2")
-    assert "New Customer" == new_customer.text
-    button_continue = browser.find_element_by_css_selector("#content > div > div:nth-child(1) > div > a")
-    button_continue.click()
+# Проверка heading загруженной страницы
+# localhost/admin/
+def test_admin_page_heading(browser):
+    browser.get(browser.url + "/admin/")
+    heading = browser.find_element(By.CSS_SELECTOR, ".panel-title")
+    assert "Please enter your login details." == heading.text
 
 
-# Проверка "Returning Customer", button Login
-# localhost/index.php?route=account/login
-def test_account_login_page_returning_customer(browser):
-    browser.get(browser.url + "/index.php?route=account/login")
-    returning_customer = browser.find_element_by_css_selector("#content > div > div:nth-child(2) > div > h2")
-    assert "Returning Customer" == returning_customer.text
-    button_login = browser.find_element_by_css_selector("#content > div > div:nth-child(2) > div > form > input")
-    button_login.click()
+# Проверка заполнения input login, input password и submit
+# localhost/admin/
+def test_admin_page_input_login_pass(browser):
+    browser.get(browser.url + "/admin/")
+    input_login = browser.find_element(By.CSS_SELECTOR, "#input-username")
+    input_login.send_keys("user")
+    input_password = browser.find_element(By.CSS_SELECTOR, "#input-password")
+    input_password.send_keys("bitnami1")
+    submit = browser.find_element_by_css_selector("button[type='submit']")
+    submit.click()
 
 
-# Проверка "input" e-mail и password
-# localhost/index.php?route=account/login
-def test_account_login_page_input(browser):
-    browser.get(browser.url + "/index.php?route=account/login")
-    input_email = browser.find_element_by_css_selector("#input-email")
-    input_email.send_keys("qweasdzxc@ya.ru")
-    input_password = browser.find_element_by_css_selector("#input-password")
-    input_password.send_keys("123456789")
-    button_login = browser.find_element_by_css_selector("#content > div > div:nth-child(2) > div > form > input")
-    button_login.click()
+# Проверка ссылки Forgotten Password
+# localhost/admin/
+def test_admin_page_forgotten_password(browser):
+    browser.get(browser.url + "/admin/")
+    text_link = browser.find_element_by_link_text("Forgotten Password")
+    text_link.click()
 
 
-# Проверка list Group
-# localhost/index.php?route=account/login
-def test_account_login_page_list_group(browser):
-    browser.get(browser.url + "/index.php?route=account/login")
-    list_group_element = browser.find_element_by_css_selector("#column-right > div")
-    for i in range(0, 13):
-        i += 1
-        text_item = list_group_element.find_element_by_css_selector(f'#column-right > div > a:nth-child({i})').text
-        assert list_group[i - 1] == text_item
+# Проверка текс label (Username, password)
+# localhost/admin/
+def test_admin_page_label(browser):
+    browser.get(browser.url + "/admin/")
+    label_username = browser.find_element(By.CSS_SELECTOR, "form > div:nth-child(1) > label")
+    placeholder_username = browser.find_element(By.CSS_SELECTOR, "#input-username").get_attribute("placeholder")
+    assert label_username.text == 'Username'
+    assert placeholder_username == 'Username'
 
-
-list_group = ["Login",
-              "Register",
-              "Forgotten Password",
-              "My Account",
-              "Address Book",
-              "Wish List",
-              "Order History",
-              "Downloads",
-              "Recurring payments",
-              "Reward Points",
-              "Returns",
-              "Transactions",
-              "Newsletter"]
+    label_password = browser.find_element_by_css_selector("form > div:nth-child(2) > label")
+    placeholder_password = browser.find_element(By.CSS_SELECTOR, "#input-password").get_attribute("placeholder")
+    assert label_password.text == 'Password'
+    assert placeholder_password == 'Password'
+    # time.sleep(5)
