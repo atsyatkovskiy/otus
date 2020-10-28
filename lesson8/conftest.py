@@ -10,34 +10,37 @@ def pytest_addoption(parser):
 
 
 @pytest.fixture
-def browser(request):
+def url(request):
+    return request.config.getoption("--url")
+
+
+@pytest.fixture
+def browser(request, url):
     # Сбор параметров запуска для pytest
     browser = request.config.getoption("--browser")
-    url = request.config.getoption("--url")
-
-    # Инициализация нужного объекта
-    # drivers = "/Users/mikhail/Downloads/drivers"
+    """ Инициализация браузера """
     if browser == "chrome":
         #  driver = webdriver.Chrome(executable_path=drivers + "/chromedriver")
         option = ChromeOptions()
         option.add_argument('--disable-popup-blocking')
         option.add_argument('--ignore-certificate-errors')
-        #  option.add_argument('--headless')
+        option.add_argument('--headless')
         driver = webdriver.Chrome(options=option)
     elif browser == "firefox":
         option = FirefoxOptions()
-        #  option.add_argument('--headless')
+        option.add_argument('--headless')
         driver = webdriver.Firefox(options=option)
         #  driver = webdriver.Firefox(executable_path=drivers + "/geckodriver")
     elif browser == "ie":
         option = IeOptions()
-        #  option.add_argument('--headless')
+        option.add_argument('--headless')
         driver = webdriver.Ie(options=option)
         #  driver = webdriver.Opera(executable_path=drivers + "/iedriver")
+    else:
+        raise Exception(f"{request.param} is not supported!")
     # Предварительная настройка запуска
     driver.maximize_window()
-    request.addfinalizer(driver.close)
-    # driver.get(url)
+    request.addfinalizer(driver.quit)
     # Сохраняю ссылку на базовый url
     driver.url = url
     # Выдача драйвера из фикстуры
