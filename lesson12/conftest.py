@@ -6,7 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 def pytest_addoption(parser):
     parser.addoption("--browser", "-B", action="store", default="chrome", help="Please, choose your browser")
-    parser.addoption("--url", "-U", action="store", default="https://localhost/")
+    parser.addoption("--url", "-U", action="store", default="https://localhost/admin/")
 
 
 @pytest.fixture
@@ -24,7 +24,7 @@ def browser(request, url):
         option = ChromeOptions()
         option.add_argument('--disable-popup-blocking')
         option.add_argument('--ignore-certificate-errors')
-        option.add_argument('--headless')
+        # option.add_argument('--headless')
         driver = webdriver.Chrome(options=option)
     elif browser == "firefox":
         option = FirefoxOptions()

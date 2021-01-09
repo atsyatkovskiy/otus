@@ -16,8 +16,31 @@ def login(browser):
     input_login.send_keys("user")
     input_password = browser.find_element(By.CSS_SELECTOR, "#input-password")
     input_password.send_keys("bitnami1")
-    submit = browser.find_element_by_css_selector("button[type='submit']")
+    submit = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
     submit.click()
+
+
+#  После login проверяем меню navigation
+# localhost/admin/
+def test_admin_page_navigation_menu(browser, wait, login):
+    """
+    1) После login проверяем меню navigation
+    """
+    menu_nav = browser.find_element(By.CSS_SELECTOR, "#menu")
+    text_menu = menu_nav.text
+    list_nav = []
+    list_nav_correct = ['Dashboard',
+                        'Catalog',
+                        'Extensions',
+                        'Design',
+                        'Sales',
+                        'Customers',
+                        'Marketing',
+                        'System',
+                        'Reports']
+    for word in text_menu.split():
+        list_nav.append(word)
+    assert list_nav == list_nav_correct
 
 
 # Проверка Logout
@@ -37,7 +60,7 @@ def test_admin_page_login_logout(browser, wait, login):
     """
     3) Ищем и жмем на Login
     """
-    browser.find_element_by_css_selector("button[type='submit']").click()
+    browser.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
     """
     4) Проверяем текст panel_heading
     """
@@ -171,16 +194,16 @@ def test_admin_page_delete_product(browser, wait, login):
     assert el_cat.get_property("innerText") == "Products"
     el_cat.click()
 
-    """
+    """ #form-product > div > table > tbody > tr:nth-child(2) > td:nth-child(3)
     2) Проверяем, есть ли в таблице новый товар Apple_product_name 
     """
     for i in range(0, 20):
         i += 1
-        text_tr = browser.find_element(By.CSS_SELECTOR, f'table > tbody > tr:nth-child({i})').text
-        if text_tr == "Apple_product_name Apple_model $0.00 1 Enabled":
-            check = browser.find_element(By.CSS_SELECTOR,
+        text_tr = browser.find_element(By.CSS_SELECTOR, f'table > tbody > tr:nth-child({i}) > td:nth-child(3)').text
+        if text_tr == "Apple_product_name":
+            checkbox = browser.find_element(By.CSS_SELECTOR,
                                          f'table > tbody > tr:nth-child({i}) > td.text-center > input[type=checkbox]')
-            check.click()
+            checkbox.click()
             break
         else:
             print(f"Элемент {text_tr} не найден")
@@ -196,4 +219,3 @@ def test_admin_page_delete_product(browser, wait, login):
     confirm.accept()
     alert_success = browser.find_element(By.CSS_SELECTOR, "div.alert.alert-success.alert-dismissible").text
     assert alert_success == "Success: You have modified products!\n×"
-
