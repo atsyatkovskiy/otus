@@ -11,7 +11,7 @@ class AdminPage(BasePage):
     LOGOUT_BUTTON = {"css": "header > div > ul > li:nth-child(2) > a"}
     PANEL_TITLE = {"css": ".panel-title"}
     NAVIGATION_LIST = {"css": "#menu"}
-    TABLE = {"css": "table > tbody > tr"}
+    #TABLE = {"css": "table > tbody > tr"}
 
     USER = 'user'
     PASSWORD = 'bitnami1'

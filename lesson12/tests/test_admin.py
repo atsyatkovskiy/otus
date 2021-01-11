@@ -1,6 +1,8 @@
 from lesson12.page_objects.AdminPage import AdminPage
 from lesson12.page_objects.CategoriesPage import CategoriesPage
 from lesson12.page_objects.ProductsPage import ProductsPage
+from lesson12.page_objects.OptionsPage import OptionsPage
+from lesson12.page_objects.ManufacturersPage import ManufacturersPage
 import time
 
 
@@ -58,6 +60,41 @@ def test_admin_page_delete_products(browser):
     ProductsPage(browser).open_products()
     ProductsPage(browser).find_table_products()
     ProductsPage(browser).check_click()
-    # time.sleep(3)
     ProductsPage(browser).click_del_button()
 
+
+def test_admin_page_add_options(browser):
+    AdminPage(browser).go_to()
+    AdminPage(browser).login_user()
+    OptionsPage(browser).open_options()
+    OptionsPage(browser).click_add_button()
+    OptionsPage(browser).input_data_option('Option_Name_date', 'Date', '123')
+    OptionsPage(browser).click_save_button()
+    #time.sleep(4)
+
+
+def test_admin_page_delete_options(browser):
+    AdminPage(browser).go_to()
+    AdminPage(browser).login_user()
+    OptionsPage(browser).open_options()
+    OptionsPage(browser).find_table_options()
+    OptionsPage(browser).check_click()
+    OptionsPage(browser).click_del_button()
+
+
+def test_admin_page_add_manufacturers(browser):
+    AdminPage(browser).go_to()
+    AdminPage(browser).login_user()
+    ManufacturersPage(browser).open_manufacturers()
+    ManufacturersPage(browser).click_add_button()
+    ManufacturersPage(browser).input_data_manufacturers('Manufacturers_Name')
+    ManufacturersPage(browser).click_save_button()
+
+
+def test_admin_page_delete_manufacturers(browser):
+    AdminPage(browser).go_to()
+    AdminPage(browser).login_user()
+    ManufacturersPage(browser).open_manufacturers()
+    ManufacturersPage(browser).find_table_manufacturers()
+    ManufacturersPage(browser).check_click()
+    ManufacturersPage(browser).click_del_button()
