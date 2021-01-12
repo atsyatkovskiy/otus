@@ -12,5 +12,10 @@
 3. https://github.com/atsyatkovskiy/otus_my_homework/tree/master/lesson4/yaru
 
 ## Домашнее задание 3 (ООП)
-
 https://github.com/atsyatkovskiy/otus_my_homework/tree/master/lesson6
+
+## Домашнее задание 4 (Основы Selenium)
+https://github.com/atsyatkovskiy/otus_my_homework/tree/master/lesson8
+
+## Домашнее задание 5 (PageObject)
+https://github.com/atsyatkovskiy/otus_my_homework/tree/master/lesson12
