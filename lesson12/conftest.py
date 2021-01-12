@@ -24,7 +24,7 @@ def browser(request, url):
         option = ChromeOptions()
         option.add_argument('--disable-popup-blocking')
         option.add_argument('--ignore-certificate-errors')
-        # option.add_argument('--headless')
+        option.add_argument('--headless')
         driver = webdriver.Chrome(options=option)
     elif browser == "firefox":
         option = FirefoxOptions()

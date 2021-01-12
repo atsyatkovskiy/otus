@@ -3,7 +3,6 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
-import time
 
 
 class BasePage:
@@ -11,17 +10,6 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
         self.base_url = "https://localhost/admin/"
-
-    # def _element(self, selector: dict, link_text: str = None):
-    #     by = None
-    #     if link_text:
-    #         by = By.LINK_TEXT
-    #     elif 'css' in selector.keys():
-    #         by = By.CSS_SELECTOR
-    #         selector = selector['css']
-    #     elif 'xpath':
-    #         by = By.XPATH
-    #     return self.driver.find_element(by, selector)
 
     def _element(self, selector: dict, index=0, link_text: str = None):
         by = None
@@ -33,15 +21,6 @@ class BasePage:
         elif 'xpath':
             by = By.XPATH
         return self.driver.find_elements(by, selector)[index]
-
-    # def _elements(self, selector: dict, link_text: str = None):
-    #     by = None
-    #     if link_text:
-    #         by = By.LINK_TEXT
-    #     elif 'css' in selector.keys():
-    #         by = By.CSS_SELECTOR
-    #         selector = selector['css']
-    #     return self.driver.find_elements(by, selector)
 
     def _find_element_checkbox_in_table(self, selector: dict, value_text: str):
         by = By.CSS_SELECTOR
