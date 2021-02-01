@@ -18,7 +18,7 @@ class AdminPage(BasePage):
     ALERT_SUCCESS = {'css': 'div.container-fluid > div.alert.alert-success.alert-dismissible'}
 
     USER = 'user'
-    PASSWORD = 'bitnami1'
+    PASSWORD = 'bitnami'
 
     def login_user(self):
         self._input(self.LOGIN_USER_NAME_INPUT, self.USER)

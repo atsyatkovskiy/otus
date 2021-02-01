@@ -16,7 +16,19 @@ class BasePage:
         # self.logger.addHandler(f)
         #logging.basicConfig(level=logging.INFO, filename="logs\\selenium.log")
 
-    def _element(self, selector: dict, index=0, link_text: str = None):
+    # def _element(self, selector: dict, index=0, link_text: str = None):
+    #     self.logger.info("Find element: {}".format(selector))
+    #     by = None
+    #     if link_text:
+    #         by = By.LINK_TEXT
+    #     elif 'css' in selector.keys():
+    #         by = By.CSS_SELECTOR
+    #         selector = selector['css']
+    #     elif 'xpath':
+    #         by = By.XPATH
+    #     return self.driver.find_elements(by, selector)[index]
+
+    def _element(self, selector: dict, index: int, link_text: str = None):
         self.logger.info("Find element: {}".format(selector))
         by = None
         if link_text:
@@ -26,6 +38,7 @@ class BasePage:
             selector = selector['css']
         elif 'xpath':
             by = By.XPATH
+        #  print('!!!!! Index = ', index)
         return self.driver.find_elements(by, selector)[index]
 
     def _find_element_checkbox_in_table(self, selector: dict, value_text: str):
@@ -44,9 +57,9 @@ class BasePage:
         self.logger.info("Clicking checkbox element: {}".format(element_object))
         element_object.click()
 
-    def _select_by_value(self, selector, value):
+    def _select_by_value(self, selector, value, index=0):
         self.logger.info("Select by value {} element: {}".format(value, selector))
-        select = Select(self._element(selector))
+        select = Select(self._element(selector, index))
         select.select_by_visible_text(value)
 
     def _confirm_accept(self):
@@ -58,9 +71,9 @@ class BasePage:
         self.logger.info("Clicking element: {}".format(selector))
         ActionChains(self.driver).move_to_element(self._element(selector, index)).click().perform()
 
-    def _input(self, selector, value):
+    def _input(self, selector, value, index=0):
         self.logger.info("Input {} in input {}".format(value, selector))
-        element = self._element(selector)
+        element = self._element(selector, index)
         element.clear()
         element.send_keys(value)
 

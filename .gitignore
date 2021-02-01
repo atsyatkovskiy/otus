@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+#my other
+.idea/
+..gitignore.swp
+/other
