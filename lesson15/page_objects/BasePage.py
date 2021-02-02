@@ -10,23 +10,11 @@ class BasePage:
 
     def __init__(self, driver):
         self.driver = driver
-        self.base_url = "https://localhost/admin/"
+        #self.base_url = "https://localhost/admin/"
         self.logger = logging.getLogger(type(self).__name__)
         # f = logging.FileHandler('logs\\selenium.log')
         # self.logger.addHandler(f)
         #logging.basicConfig(level=logging.INFO, filename="logs\\selenium.log")
-
-    # def _element(self, selector: dict, index=0, link_text: str = None):
-    #     self.logger.info("Find element: {}".format(selector))
-    #     by = None
-    #     if link_text:
-    #         by = By.LINK_TEXT
-    #     elif 'css' in selector.keys():
-    #         by = By.CSS_SELECTOR
-    #         selector = selector['css']
-    #     elif 'xpath':
-    #         by = By.XPATH
-    #     return self.driver.find_elements(by, selector)[index]
 
     def _element(self, selector: dict, index: int, link_text: str = None):
         self.logger.info("Find element: {}".format(selector))
@@ -38,7 +26,6 @@ class BasePage:
             selector = selector['css']
         elif 'xpath':
             by = By.XPATH
-        #  print('!!!!! Index = ', index)
         return self.driver.find_elements(by, selector)[index]
 
     def _find_element_checkbox_in_table(self, selector: dict, value_text: str):
@@ -89,7 +76,7 @@ class BasePage:
         self.logger.info("Get element text: {}".format(selector))
         return self._element(selector).text
 
-    def go_to(self):
-        self.logger.info("Opening url: {}".format(self.base_url))
-        return self.driver.get(self.base_url)
+    def _go_to(self, url):
+        self.logger.info("Opening url: {}".format(url))
+        return self.driver.get(url)
 

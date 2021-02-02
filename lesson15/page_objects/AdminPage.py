@@ -20,6 +20,9 @@ class AdminPage(BasePage):
     USER = 'user'
     PASSWORD = 'bitnami'
 
+    URL = 'https://localhost/admin/'
+    #URL = "https://habr.com/"
+
     def login_user(self):
         self._input(self.LOGIN_USER_NAME_INPUT, self.USER)
         self._input(self.LOGIN_PASSWORD_INPUT, self.PASSWORD)
@@ -50,3 +53,6 @@ class AdminPage(BasePage):
     def click_save_button(self):
         self._click(self.SAVE_BUTTON)
         return self
+
+    def go_to(self):
+        return self._go_to(self.URL)
