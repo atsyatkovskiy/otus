@@ -8,7 +8,7 @@ class AdminPage(BasePage):
     LOGIN_USER_NAME_INPUT = {'css': '#input-username'}
     LOGIN_PASSWORD_INPUT = {'css': '#input-password'}
     LOGIN_BUTTON = {"css": "button[type='submit']"}
-    LOGOUT_BUTTON = {"css": "header > div > ul > li:nth-child(2) > a"}
+    LOGOUT_BUTTON = {"css": "#header > div > ul > li:nth-child(2) > a"}
     PANEL_TITLE = {"css": ".panel-title"}
     NAVIGATION_LIST = {"css": "#menu"}
 
@@ -19,6 +19,10 @@ class AdminPage(BasePage):
 
     USER = 'user'
     PASSWORD = 'bitnami'
+
+    # URL = 'http://1.168.1.34/admin/'
+    URL = 'https://demo.opencart.com/admin'
+    # URL = "https://habr.com/"
 
     def login_user(self):
         self._input(self.LOGIN_USER_NAME_INPUT, self.USER)
@@ -50,3 +54,6 @@ class AdminPage(BasePage):
     def click_save_button(self):
         self._click(self.SAVE_BUTTON)
         return self
+
+    def go_to(self):
+        return self._go_to(self.URL)

@@ -2,41 +2,72 @@ import pytest
 from selenium.webdriver import ChromeOptions, FirefoxOptions, IeOptions
 import logging
 from selenium import webdriver
-import os
-
-#cwd = os.getcwd()  # Get the current working directory (cwd)
-#files = os.listdir(cwd)  # Get all the files in that directory
-#print("Files in %r: %s" % (cwd, files))
+import allure
+import json
 
 logging.basicConfig(level=logging.INFO, filename="logs\\selenium.log")
 
 
 def pytest_addoption(parser):
-    parser.addoption("--browser", "-B", action="store", default="chrome", help="Please, choose your browser")
+    parser.addoption("--browser", action="store", default="chrome", help="Please, choose your browser")
     parser.addoption("--url", "-U", action="store", default="https://localhost/admin/")
+    # parser.addoption("--bversion", action="store", required=True)
+    parser.addoption("--vnc", action="store_true", default=True)
+    parser.addoption("--logs", action="store_true", default=False)
+    parser.addoption("--videos", action="store_true", default=False)
+    parser.addoption("--executor", action="store", default="localhost")
+    parser.addoption("--mobile", action="store_true")
 
 
 @pytest.fixture
-def url(request):
-    return request.config.getoption("--url")
-
-
-@pytest.fixture
-def browser(request, url):
+def browser(request):
     # Сбор параметров запуска для pytest
     browser = request.config.getoption("--browser")
+    # version = request.config.getoption("--bversion")
+    executor = request.config.getoption("--executor")
+    vnc = request.config.getoption("--vnc")
+    logs = request.config.getoption("--logs")
+    videos = request.config.getoption("--videos")
+    executor_url = f"http://{executor}:4444/wd/hub"
+    # mobile = request.config.getoption("--mobile")
+
+    caps = {
+        "browserName": browser,
+        "browserVersion": "88.0",
+        "screenResolution": "1920x1080",
+        "name": "Alex.T",
+        "selenoid:options": {
+            "enableVNC": vnc,
+            "enableVideo": videos,
+            "enableLog": logs,
+        },
+        'acceptSslCerts': True,
+        'acceptInsecureCerts': True,
+        'timeZone': 'Europe/Moscow',
+        'goog:chromeOptions': {
+            'args': []
+        }
+    }
+
     logger = logging.getLogger('BrowserLogger')
     test_name = request.node.name
     logger.info("===> Test {} started".format(test_name))
 
     """ Инициализация браузера """
     if browser == "chrome":
+    # if browser == "chrome" and mobile:
+    #     caps["goog:chromeOptions"]["mobileEmulation"] = {"deviceName": "iPhone 5/SE"}
         #  driver = webdriver.Chrome(executable_path=drivers + "/chromedriver")
         option = ChromeOptions()
         option.add_argument('--disable-popup-blocking')
         option.add_argument('--ignore-certificate-errors')
         # option.add_argument('--headless')
-        driver = webdriver.Chrome(options=option)
+        # driver = webdriver.Chrome(options=option)
+        driver = webdriver.Remote(
+            command_executor=executor_url,
+            options=option,
+            desired_capabilities=caps
+        )
     elif browser == "firefox":
         option = FirefoxOptions()
         option.add_argument('--headless')
@@ -59,7 +90,5 @@ def browser(request, url):
         logger.info("===> Test {} FINISHED".format(test_name))
 
     request.addfinalizer(fin)
-    # Сохраняю ссылку на базовый url
-    driver.url = url
     # Выдача драйвера из фикстуры
     return driver
