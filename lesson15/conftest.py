@@ -2,29 +2,24 @@ import pytest
 from selenium.webdriver import ChromeOptions, FirefoxOptions, IeOptions
 import logging
 from selenium import webdriver
+import allure
+import json
 
 logging.basicConfig(level=logging.INFO, filename="logs\\selenium.log")
 
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome", help="Please, choose your browser")
-    # parser.addoption("--url", "-U", action="store", default="https://localhost/admin/")
-
+    parser.addoption("--url", "-U", action="store", default="https://localhost/admin/")
     # parser.addoption("--bversion", action="store", required=True)
-    parser.addoption("--vnc", action="store_true", default=False)
+    parser.addoption("--vnc", action="store_true", default=True)
     parser.addoption("--logs", action="store_true", default=False)
     parser.addoption("--videos", action="store_true", default=False)
     parser.addoption("--executor", action="store", default="localhost")
     parser.addoption("--mobile", action="store_true")
 
 
-# @pytest.fixture
-# def url(request):
-#     return request.config.getoption("--url")
-
-
 @pytest.fixture
-#def browser(request, url):
 def browser(request):
     # Сбор параметров запуска для pytest
     browser = request.config.getoption("--browser")
@@ -34,13 +29,13 @@ def browser(request):
     logs = request.config.getoption("--logs")
     videos = request.config.getoption("--videos")
     executor_url = f"http://{executor}:4444/wd/hub"
-    mobile = request.config.getoption("--mobile")
+    # mobile = request.config.getoption("--mobile")
 
     caps = {
         "browserName": browser,
-        # "browserVersion": version,
-        "screenResolution": "1280x720",
-        "name": "Mikhail.C",
+        "browserVersion": "88.0",
+        "screenResolution": "1920x1080",
+        "name": "Alex.T",
         "selenoid:options": {
             "enableVNC": vnc,
             "enableVideo": videos,
@@ -64,7 +59,7 @@ def browser(request):
     #     caps["goog:chromeOptions"]["mobileEmulation"] = {"deviceName": "iPhone 5/SE"}
         #  driver = webdriver.Chrome(executable_path=drivers + "/chromedriver")
         option = ChromeOptions()
-        # option.add_argument('--disable-popup-blocking')
+        option.add_argument('--disable-popup-blocking')
         option.add_argument('--ignore-certificate-errors')
         # option.add_argument('--headless')
         # driver = webdriver.Chrome(options=option)
@@ -95,7 +90,5 @@ def browser(request):
         logger.info("===> Test {} FINISHED".format(test_name))
 
     request.addfinalizer(fin)
-    # Сохраняю ссылку на базовый url
-    #driver.url = url
     # Выдача драйвера из фикстуры
     return driver
