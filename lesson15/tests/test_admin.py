@@ -1,3 +1,9 @@
+# import os, sys, inspect
+# currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+# parentdir = os.path.dirname(currentdir)
+# parentdir = os.path.dirname(parentdir)
+# sys.path.insert(0, parentdir)
+
 from lesson15.page_objects.AdminPage import AdminPage
 from lesson15.page_objects.CategoriesPage import CategoriesPage
 from lesson15.page_objects.ProductsPage import ProductsPage
@@ -5,6 +11,7 @@ from lesson15.page_objects.OptionsPage import OptionsPage
 from lesson15.page_objects.ManufacturersPage import ManufacturersPage
 import allure
 import time
+
 
 
 @allure.feature('OpenCart')
