@@ -11,18 +11,35 @@ parser = argparse.ArgumentParser(description='Process access.log')
 parser.add_argument('-f', dest='file',  action='store', help='Path to logfile', default='access.log')
 args = parser.parse_args()
 
-dict_ip = defaultdict(lambda: {"GET": 0,"POST": 0,"PUT": 0,"DELETE": 0,"HEAD": 0})
+dict_ip = defaultdict(lambda: {"GET": 0, "POST": 0, "PUT": 0, "DELETE": 0, "HEAD": 0})
+dict_meth = {"GET": 0, "POST": 0, "PUT": 0, "DELETE": 0, "HEAD": 0}
+total = 0
 
 with open(args.file) as file:
     for index, line in enumerate(file.readlines()):
         # 109.184.11.34 - - [12/Dec/2015:18:32:56 +0100] "GET /administrator/ HTTP/1.1" 200 4263 "-" "Mozilla/5.0 (Windows NT 6.0; rv:34.0) Gecko/20100101 Firefox/34.0" "-"
-        ip = re.search(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", line).group()
-        method = re.search(r"\] \"(POST|GET|PUT|DELETE|HEAD)", line).groups()[0]
+        ip = re.search(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", line)
+        if ip is not None:
+            ip = ip.group()
 
+            total += 1
+        else:
+            continue
+
+        method = re.search(r"\] \"(POST|GET|PUT|DELETE|HEAD)", line)
+        if method is not None:
+            method = method.groups()[0]
+
+        else:
+            continue
+
+        dict_meth[method] += 1
         dict_ip[ip][method] += 1
 
-        if index > 99:
-            break
+        # if index > 99:
+        #     break
 
 # print(dict_ip)
-print(json.dumps(dict_ip, indent=4))
+# print(json.dumps(dict_ip, indent=4))
+print(json.dumps(dict_meth, indent=4))  # общее кол-во запросов
+print(total)  # общее кол-во запросов
