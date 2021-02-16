@@ -19,10 +19,7 @@ class AdminPage(BasePage):
 
     USER = 'user'
     PASSWORD = 'bitnami'
-
-    # URL = 'http://1.168.1.34/admin/'
-    URL = 'https://demo.opencart.com/admin'
-    # URL = "https://habr.com/"
+    URL = "http://192.168.1.34/admin/"
 
     def login_user(self):
         self._input(self.LOGIN_USER_NAME_INPUT, self.USER)
