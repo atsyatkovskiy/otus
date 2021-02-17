@@ -41,7 +41,7 @@ class BasePage:
             else:
                 print(f"Элемент не найден, это:", i.text)
 
-    @allure.step("Clicking checkbox element: {selector}")
+    @allure.step("Clicking checkbox element")
     def _click_checkbox_in_table(self, element_object):
         self.logger.info("Clicking checkbox element: {}".format(element_object))
         element_object.click()
