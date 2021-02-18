@@ -1,4 +1,4 @@
-from lesson15.page_objects.BasePage import BasePage
+from page_objects.BasePage import BasePage
 
 
 class ManufacturersPage(BasePage):

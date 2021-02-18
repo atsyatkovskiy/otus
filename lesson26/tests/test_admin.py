@@ -4,11 +4,11 @@ parentdir = os.path.dirname(currentdir)
 parentdir = os.path.dirname(parentdir)
 sys.path.insert(0, parentdir)
 
-from lesson15.page_objects.AdminPage import AdminPage
-from lesson15.page_objects.CategoriesPage import CategoriesPage
-from lesson15.page_objects.ProductsPage import ProductsPage
-from lesson15.page_objects.OptionsPage import OptionsPage
-from lesson15.page_objects.ManufacturersPage import ManufacturersPage
+from page_objects.AdminPage import AdminPage
+from page_objects.CategoriesPage import CategoriesPage
+from page_objects.ProductsPage import ProductsPage
+from page_objects.OptionsPage import OptionsPage
+from page_objects.ManufacturersPage import ManufacturersPage
 import allure
 import time
 

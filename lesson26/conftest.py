@@ -15,7 +15,8 @@ def pytest_addoption(parser):
     parser.addoption("--vnc", action="store_true", default=True)
     parser.addoption("--logs", action="store_true", default=False)
     parser.addoption("--videos", action="store_true", default=False)
-    parser.addoption("--executor", action="store", default="localhost")
+    # parser.addoption("--executor", action="store", default="localhost")
+    parser.addoption("--executor", action="store", default="172.29.237.21")
     parser.addoption("--mobile", action="store_true")
 
 
