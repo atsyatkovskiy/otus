@@ -10,13 +10,13 @@ logging.basicConfig(level=logging.INFO, filename="logs\\selenium.log")
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome", help="Please, choose your browser")
-    parser.addoption("--url", "-U", action="store", default="https://localhost/admin/")
+    parser.addoption("--url", "-U", action="store", default="https://192.168.1.34/admin/")
     # parser.addoption("--bversion", action="store", required=True)
     parser.addoption("--vnc", action="store_true", default=True)
     parser.addoption("--logs", action="store_true", default=False)
     parser.addoption("--videos", action="store_true", default=False)
     # parser.addoption("--executor", action="store", default="localhost")
-    parser.addoption("--executor", action="store", default="172.29.237.21")
+    parser.addoption("--executor", action="store", default="192.168.1.34")
     parser.addoption("--mobile", action="store_true")
 
 
@@ -34,7 +34,7 @@ def browser(request):
 
     caps = {
         "browserName": browser,
-        "browserVersion": "88.0",
+        # "browserVersion": "88.0",
         "screenResolution": "1920x1080",
         "name": "Alex.T",
         "selenoid:options": {
@@ -45,9 +45,10 @@ def browser(request):
         'acceptSslCerts': True,
         'acceptInsecureCerts': True,
         'timeZone': 'Europe/Moscow',
-        'goog:chromeOptions': {
-            'args': []
-        }
+        # 'goog:chromeOptions':
+        #     {
+        #     'args': []
+        # }
     }
 
     logger = logging.getLogger('BrowserLogger')
@@ -58,7 +59,6 @@ def browser(request):
     if browser == "chrome":
     # if browser == "chrome" and mobile:
     #     caps["goog:chromeOptions"]["mobileEmulation"] = {"deviceName": "iPhone 5/SE"}
-        #  driver = webdriver.Chrome(executable_path=drivers + "/chromedriver")
         option = ChromeOptions()
         option.add_argument('--disable-popup-blocking')
         option.add_argument('--ignore-certificate-errors')
@@ -71,9 +71,14 @@ def browser(request):
         )
     elif browser == "firefox":
         option = FirefoxOptions()
-        option.add_argument('--headless')
-        driver = webdriver.Firefox(options=option)
-        #  driver = webdriver.Firefox(executable_path=drivers + "/geckodriver")
+        option.add_argument('--disable-popup-blocking')
+        option.add_argument('--ignore-certificate-errors')
+        # option.add_argument('--headless')
+        driver = webdriver.Remote(
+            command_executor=executor_url,
+            options=option,
+            desired_capabilities=caps
+        )
     elif browser == "ie":
         option = IeOptions()
         option.add_argument('--headless')

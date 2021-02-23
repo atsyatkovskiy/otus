@@ -20,7 +20,7 @@ class BasePage:
         by = None
         if link_text:
             by = By.LINK_TEXT
-            selector = By.LINK_TEXT
+            selector = link_text
         elif 'css' in selector.keys():
             by = By.CSS_SELECTOR
             selector = selector['css']
@@ -71,7 +71,7 @@ class BasePage:
         element.send_keys(value)
 
     @allure.step("Wait for visible element: {selector}")
-    def _wait_for_visible(self, selector, link_text=None, index=0, wait=5):
+    def _wait_for_visible(self, selector, link_text=None, index=0, wait=10):
         self.logger.info("Wait for visible element: {}".format(selector))
         return WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index, link_text)))
 

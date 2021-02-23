@@ -1,4 +1,5 @@
-from .BasePage import BasePage
+from page_objects.BasePage import BasePage
+import allure
 import time
 
 
@@ -8,7 +9,8 @@ class AdminPage(BasePage):
     LOGIN_USER_NAME_INPUT = {'css': '#input-username'}
     LOGIN_PASSWORD_INPUT = {'css': '#input-password'}
     LOGIN_BUTTON = {"css": "button[type='submit']"}
-    LOGOUT_BUTTON = {"css": "#header > div > ul > li:nth-child(2) > a"}
+    LOGOUT_BUTTON = {"css": ".nav > li:nth-child(2)"}
+    # .fa-sign-out
     PANEL_TITLE = {"css": ".panel-title"}
     NAVIGATION_LIST = {"css": "#menu"}
 
@@ -19,8 +21,8 @@ class AdminPage(BasePage):
 
     USER = 'user'
     PASSWORD = 'bitnami'
-    # URL = "http://192.168.1.34/admin/"
-    URL = "http://demo.opencart.com/admin"
+    URL = "http://192.168.1.34/admin/"
+    # URL = "http://demo.opencart.com/admin"
 
     def login_user(self):
         self._input(self.LOGIN_USER_NAME_INPUT, self.USER)
@@ -29,6 +31,7 @@ class AdminPage(BasePage):
         return self
 
     def logout_user(self):
+        self._wait_for_visible(self.LOGOUT_BUTTON)
         self._click(self.LOGOUT_BUTTON)
         return self
 
@@ -54,4 +57,5 @@ class AdminPage(BasePage):
         return self
 
     def go_to(self):
-        return self._go_to(self.URL)
+        self._go_to(self.URL)
+        return self
