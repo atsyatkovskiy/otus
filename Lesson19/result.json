@@ -1,0 +1,196 @@
+{
+    "total": 3216980,
+    "methods": {
+        "GET": 2247848,
+        "POST": 918794,
+        "PUT": 70,
+        "DELETE": 1,
+        "HEAD": 49971
+    },
+    "top10": [
+        {
+            "ip": "193.106.31.130",
+            "requests": 235209
+        },
+        {
+            "ip": "198.50.156.189",
+            "requests": 167812
+        },
+        {
+            "ip": "5.112.235.245",
+            "requests": 166722
+        },
+        {
+            "ip": "5.114.231.216",
+            "requests": 158258
+        },
+        {
+            "ip": "5.113.18.208",
+            "requests": 157674
+        },
+        {
+            "ip": "91.218.225.68",
+            "requests": 134367
+        },
+        {
+            "ip": "79.62.229.212",
+            "requests": 114759
+        },
+        {
+            "ip": "149.56.83.40",
+            "requests": 97533
+        },
+        {
+            "ip": "5.114.64.184",
+            "requests": 94043
+        },
+        {
+            "ip": "5.113.216.211",
+            "requests": 89125
+        }
+    ],
+    "top10_client_errors": [
+        {
+            "url": "/apache-log/favicon.ico",
+            "method": "GET",
+            "code": 404,
+            "ip": "128.74.162.38",
+            "requests": 1996
+        },
+        {
+            "url": "/templates/_system/css/general.css",
+            "method": "GET",
+            "code": 404,
+            "ip": "158.64.79.8",
+            "requests": 547
+        },
+        {
+            "url": "/templates/_system/css/general.css",
+            "method": "GET",
+            "code": 404,
+            "ip": "158.64.79.7",
+            "requests": 459
+        },
+        {
+            "url": "/apache-log/favicon.ico",
+            "method": "GET",
+            "code": 404,
+            "ip": "46.188.125.44",
+            "requests": 451
+        },
+        {
+            "url": "/favicon.ico",
+            "method": "GET",
+            "code": 404,
+            "ip": "158.64.79.8",
+            "requests": 317
+        },
+        {
+            "url": "/templates/_system/css/general.css",
+            "method": "GET",
+            "code": 404,
+            "ip": "85.10.113.129",
+            "requests": 276
+        },
+        {
+            "url": "/apple-touch-icon-precomposed.png",
+            "method": "GET",
+            "code": 404,
+            "ip": "62.46.187.218",
+            "requests": 228
+        },
+        {
+            "url": "/apple-touch-icon.png",
+            "method": "GET",
+            "code": 404,
+            "ip": "62.46.187.218",
+            "requests": 228
+        },
+        {
+            "url": "/favicon.ico",
+            "method": "GET",
+            "code": 404,
+            "ip": "62.46.187.218",
+            "requests": 228
+        },
+        {
+            "url": "/apple-touch-icon-precomposed.png",
+            "method": "GET",
+            "code": 404,
+            "ip": "91.113.15.50",
+            "requests": 220
+        }
+    ],
+    "top10_server_errors": [
+        {
+            "url": "/administrator/index.php",
+            "method": "POST",
+            "code": 500,
+            "ip": "178.33.23.156",
+            "requests": 589
+        },
+        {
+            "url": "/index.php?option=com_content&view=9876sfi&id=49&Itemid=55",
+            "method": "GET",
+            "code": 500,
+            "ip": "91.218.225.68",
+            "requests": 30
+        },
+        {
+            "url": "/index.php?view=article&catid=34:raith&id=49:ferienwohnung-1&tmpl=component&print=1&layout=9876sfi&page=&option=com_content&Itemid=47",
+            "method": "GET",
+            "code": 500,
+            "ip": "91.218.225.68",
+            "requests": 30
+        },
+        {
+            "url": "/index.php?format=9876sfi&type=rss",
+            "method": "GET",
+            "code": 500,
+            "ip": "91.218.225.68",
+            "requests": 22
+        },
+        {
+            "url": "/index.php?option=com_content&view=article'A=0&id=46&Itemid=54",
+            "method": "HEAD",
+            "code": 500,
+            "ip": "100.1.14.108",
+            "requests": 21
+        },
+        {
+            "url": "/index.php?format=feed&type=9876sfi",
+            "method": "GET",
+            "code": 500,
+            "ip": "91.218.225.68",
+            "requests": 19
+        },
+        {
+            "url": "http://almhuette-raith.at/administrator/index.php",
+            "method": "GET",
+            "code": 500,
+            "ip": "134.249.53.185",
+            "requests": 16
+        },
+        {
+            "url": "/index.php?view=article&catid=34:raith&id=49:ferienwohnung-1&tmpl=component&print=1&layout=9876sfi&page=&option=com_content&Itemid=46",
+            "method": "GET",
+            "code": 500,
+            "ip": "79.62.229.212",
+            "requests": 15
+        },
+        {
+            "url": "/index.php?option=com_content&amp;view=frontpage//?mosConfig_absolute_path=http://aquaplant.com.ua/form/tpl/templates_d/logx???",
+            "method": "GET",
+            "code": 500,
+            "ip": "176.31.226.22",
+            "requests": 12
+        },
+        {
+            "url": "/index.php?option=com_content&view=article'A=0&id=46&Itemid=54",
+            "method": "GET",
+            "code": 500,
+            "ip": "100.1.14.108",
+            "requests": 11
+        }
+    ]
+}

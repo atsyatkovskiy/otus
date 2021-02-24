@@ -24,7 +24,6 @@ if __name__ == '__main__':
             ip = re.search(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", line)
             if ip is not None:
                 ip = ip.group()
-
                 total += 1
             else:
                 continue
@@ -53,16 +52,11 @@ if __name__ == '__main__':
 
     top10_server_errors = sorted(server_errors.items(), key=lambda x: x[1], reverse=True)[:10]
 
-#    for item in dict_ip.items():
- #       print(item[1])
-
     # print(dict_ip)
     # print(json.dumps(dict_ip, indent=4))
     # print(json.dumps(dict_meth, indent=4))  # общее кол-во запросов
     # print(total)  # общее кол-во запросов
     # print(dict_ip)  # общее кол-во запросов
-    # for item in top10:
-    #    print(item[0], sum(item[1].values()))
 
     top10_list = []
     for item in top10:
@@ -95,3 +89,6 @@ if __name__ == '__main__':
     }
 
     print(json.dumps(result, indent=4))
+
+    with open("result.json", "w", encoding="utf-8") as resultfile:
+        json.dump(result, resultfile, indent=4)
