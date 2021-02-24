@@ -79,6 +79,12 @@ def browser(request):
             options=option,
             desired_capabilities=caps
         )
+    elif browser == "opera":
+        # option.add_argument('--headless')
+        driver = webdriver.Remote(
+            command_executor=executor_url,
+            desired_capabilities=caps
+        )
     elif browser == "ie":
         option = IeOptions()
         option.add_argument('--headless')
