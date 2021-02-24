@@ -19,3 +19,4 @@ docker cp my_run:/app/allure-report .
 
 # Удаляем из системы созданный контейнер
 docker system prune -f
+docker rmi my_tests
