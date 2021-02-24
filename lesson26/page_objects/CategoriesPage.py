@@ -18,6 +18,8 @@ class CategoriesPage(BasePage):
         return self
 
     def input_data_categories(self, name_categories, tag_categories):
+        self._wait_for_visible(self.NAME_INPUT)
+        self._wait_to_be_clickable(self.NAME_INPUT)
         self._input(self.NAME_INPUT, name_categories)
         self._input(self.TAG_TITLE_INPUT, tag_categories)
         return self

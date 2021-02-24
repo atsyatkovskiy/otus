@@ -71,12 +71,12 @@ class BasePage:
         element.send_keys(value)
 
     @allure.step("Wait for visible element: {selector}")
-    def _wait_for_visible(self, selector, link_text=None, index=0, wait=10):
+    def _wait_for_visible(self, selector, link_text=None, index=0, wait=100):
         self.logger.info("Wait for visible element: {}".format(selector))
         return WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index, link_text)))
 
     @allure.step("Wait to be clickable element: {selector}")
-    def _wait_to_be_clickable(self, selector, link_text=None, index=0, wait=5):
+    def _wait_to_be_clickable(self, selector, link_text=None, index=0, wait=100):
         self.logger.info("Wait to be clickable element: {}".format(selector))
         return WebDriverWait(self.driver, wait).until(EC.element_to_be_clickable(self._element(selector, index, link_text)))
 
