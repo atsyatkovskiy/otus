@@ -23,4 +23,4 @@ ENTRYPOINT ["pytest", "--alluredir", "allure-report"]
 
 # Этот параметр можно переопределить при СОЗДАНИИ контейнера т.е. run команде
 # Можно исапользовать так `docker run --rm my_tests --browser firefox`
-CMD ["--browser", "chrome"]
+CMD ["--browser", "chrome", "--executor", "192.168.1.34"]
