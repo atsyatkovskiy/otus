@@ -10,10 +10,8 @@ class AdminPage(BasePage):
     LOGIN_PASSWORD_INPUT = {'css': '#input-password'}
     LOGIN_BUTTON = {"css": "button[type='submit']"}
     LOGOUT_BUTTON = {"css": ".nav > li:nth-child(2)"}
-    # .fa-sign-out
     PANEL_TITLE = {"css": ".panel-title"}
     NAVIGATION_LIST = {"css": "#menu"}
-
     ADD_BUTTON = {'css': 'a.btn.btn-primary'}
     DEL_BUTTON = {'css': 'button[data-original-title=Delete]'}
     SAVE_BUTTON = {'css': 'div.pull-right > button.btn.btn-primary'}
