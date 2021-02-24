@@ -70,13 +70,13 @@ def browser(request):
             desired_capabilities=caps
         )
     elif browser == "firefox":
-        option = FirefoxOptions()
-        option.add_argument('--disable-popup-blocking')
-        option.add_argument('--ignore-certificate-errors')
+        # option = FirefoxOptions()
+        # option.add_argument('--disable-popup-blocking')
+        # option.add_argument('--ignore-certificate-errors')
         # option.add_argument('--headless')
         driver = webdriver.Remote(
             command_executor=executor_url,
-            options=option,
+          #  options=option,
             desired_capabilities=caps
         )
     elif browser == "opera":
