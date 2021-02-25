@@ -13,7 +13,7 @@ import allure
 import time
 
 
-@allure.feature('OpenCart')
+@allure.feature('OpenCart Admin')
 @allure.title('Login и logout страницы admin')
 def test_admin_page_login_logout(browser):
     AdminPage(browser).go_to()
@@ -23,7 +23,7 @@ def test_admin_page_login_logout(browser):
     assert text_panel_title == 'Please enter your login details.'
 
 
-@allure.feature('OpenCart')
+@allure.feature('OpenCart Admin')
 @allure.title('Добавление новой categories - Apple_category_name')
 def test_admin_page_add_categories(browser):
     AdminPage(browser).go_to()
@@ -34,7 +34,7 @@ def test_admin_page_add_categories(browser):
     AdminPage(browser).click_save_button()
 
 
-@allure.feature('OpenCart')
+@allure.feature('OpenCart Admin')
 @allure.title('Удаление categories - Apple_category_name')
 def test_admin_page_delete_categories(browser):
     AdminPage(browser).go_to()
@@ -45,7 +45,7 @@ def test_admin_page_delete_categories(browser):
     AdminPage(browser).click_del_button()
 
 
-@allure.feature('OpenCart')
+@allure.feature('OpenCart Admin')
 @allure.title('Добавление нового products')
 def test_admin_page_add_products(browser):
     AdminPage(browser).go_to()
@@ -56,7 +56,7 @@ def test_admin_page_add_products(browser):
     AdminPage(browser).click_save_button()
 
 
-@allure.feature('OpenCart')
+@allure.feature('OpenCart Admin')
 @allure.title('Удаление products - Apple_product_name')
 def test_admin_page_delete_products(browser):
     AdminPage(browser).go_to()
@@ -67,7 +67,7 @@ def test_admin_page_delete_products(browser):
     AdminPage(browser).click_del_button()
 
 
-@allure.feature('OpenCart')
+@allure.feature('OpenCart Admin')
 @allure.title('Добавление новой options')
 def test_admin_page_add_options(browser):
     AdminPage(browser).go_to()
@@ -78,7 +78,7 @@ def test_admin_page_add_options(browser):
     AdminPage(browser).click_save_button()
 
 
-@allure.feature('OpenCart')
+@allure.feature('OpenCart Admin')
 @allure.title('Удаление options - Option_Name_date')
 def test_admin_page_delete_options(browser):
     AdminPage(browser).go_to()
@@ -89,7 +89,7 @@ def test_admin_page_delete_options(browser):
     AdminPage(browser).click_del_button()
 
 
-@allure.feature('OpenCart')
+@allure.feature('OpenCart Admin')
 @allure.title('Добавление новой Manufacturers')
 def test_admin_page_add_manufacturers(browser):
     AdminPage(browser).go_to()
@@ -100,7 +100,7 @@ def test_admin_page_add_manufacturers(browser):
     AdminPage(browser).click_save_button()
 
 
-@allure.feature('OpenCart')
+@allure.feature('OpenCart Admin')
 @allure.title('Удаление Manufacturers - Manufacturers_Name')
 def test_admin_page_delete_manufacturers(browser):
     AdminPage(browser).go_to()
