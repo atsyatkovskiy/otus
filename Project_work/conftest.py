@@ -63,12 +63,12 @@ def browser(request):
         option.add_argument('--disable-popup-blocking')
         option.add_argument('--ignore-certificate-errors')
         # option.add_argument('--headless')
-        driver = webdriver.Chrome(options=option)
-        # driver = webdriver.Remote(
-        #     command_executor=executor_url,
-        #     options=option,
-        #     desired_capabilities=caps
-        # )
+        # driver = webdriver.Chrome(options=option)
+        driver = webdriver.Remote(
+            command_executor=executor_url,
+            options=option,
+            desired_capabilities=caps
+        )
     elif browser == "firefox":
         # option = FirefoxOptions()
         # option.add_argument('--disable-popup-blocking')
