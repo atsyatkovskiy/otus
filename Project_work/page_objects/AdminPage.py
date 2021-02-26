@@ -47,7 +47,7 @@ class AdminPage(BasePage):
     def click_del_button(self):
         self._click(self.DEL_BUTTON)
         self._confirm_accept()
-        self._wait_for_visible(self.ALERT_SUCCESS)
+        # self._wait_for_visible(self.ALERT_SUCCESS)
         return self
 
     def click_save_button(self):
