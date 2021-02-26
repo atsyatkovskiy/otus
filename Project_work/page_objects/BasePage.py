@@ -4,6 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import NoSuchElementException
 import allure
 import logging
 
@@ -15,7 +16,21 @@ class BasePage:
         # self.base_url = "https://localhost/admin/"
         self.logger = logging.getLogger(type(self).__name__)
 
-    @allure.step("Поиск элемента: {selector}")
+    # @allure.step("Поиск элемента: {selector}")
+    # def _element(self, selector: dict = None, index: int = 0, link_text: str = None):
+    #     self.logger.info("Find element: {}".format(selector))
+    #     by = None
+    #     if link_text:
+    #         by = By.LINK_TEXT
+    #         selector = link_text
+    #     elif 'css' in selector.keys():
+    #         by = By.CSS_SELECTOR
+    #         selector = selector['css']
+    #     elif 'xpath':
+    #         by = By.XPATH
+    #     return self.driver.find_elements(by, selector)[index]
+
+    # @allure.step("Поиск элемента: {selector}")
     def _element(self, selector: dict = None, index: int = 0, link_text: str = None):
         self.logger.info("Find element: {}".format(selector))
         by = None
@@ -27,7 +42,28 @@ class BasePage:
             selector = selector['css']
         elif 'xpath':
             by = By.XPATH
-        return self.driver.find_elements(by, selector)[index]
+        # return self.driver.find_elements(by, selector)[index]
+        with allure.step("Поиск элемента"):
+            try:
+                self.driver.find_element_by_css_selector("no-such-selector")
+            except NoSuchElementException as e:
+                allure.attach(body=self.driver.get_screenshot_as_png(),
+                              name="screenshot_image",
+                              attachment_type=allure.attachment_type.PNG)
+                raise AssertionError(e.msg)
+
+    @allure.step("Поиск элемента checkbox в таблице: {selector}")
+    def _find_element_checkbox_in_table(self, selector: dict, value_text: str):
+        self.logger.info("Find element checkbox in table: {}".format(selector))
+        by = By.CSS_SELECTOR
+        selector_css = selector['css']
+        a = self.driver.find_elements(by, selector_css)
+        for i in a:
+            if i.text == value_text:
+                print(f"Элемент найден, это:", i.text)
+                return i.find_element(by, 'input[type=checkbox]')
+            else:
+                print(f"Элемент не найден, это:", i.text)
 
     @allure.step("Поиск элемента checkbox в таблице: {selector}")
     def _find_element_checkbox_in_table(self, selector: dict, value_text: str):
