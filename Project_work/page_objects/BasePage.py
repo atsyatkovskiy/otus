@@ -108,8 +108,9 @@ class BasePage:
         return WebDriverWait(self.driver, wait).until(EC.element_to_be_clickable(self._element(selector, index, link_text)))
 
     @allure.step("Получаем текст элемента: {selector}")
-    def _get_element_text(self, selector, index=0):
+    def _get_element_text(self, selector, index=0, wait=15):
         self.logger.info("Get element text: {}".format(selector))
+        self._wait_for_visible(selector, index, wait)
         return self._element(selector, index).text
 
     @allure.step("Открываем url: {url}")
