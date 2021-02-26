@@ -110,7 +110,7 @@ class BasePage:
     @allure.step("Получаем текст элемента: {selector}")
     def _get_element_text(self, selector, index=0):
         self.logger.info("Get element text: {}".format(selector))
-        self._wait_for_visible(selector, index, wait=15)
+        # self._wait_for_visible(selector, index, wait=15)
         return self._element(selector, index).text
 
     @allure.step("Открываем url: {url}")
