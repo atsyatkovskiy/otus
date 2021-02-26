@@ -86,10 +86,21 @@ class BasePage:
         element.clear()
         element.send_keys(value)
 
-    @allure.step("Ждем появление элемента: {selector}")
-    def _wait_for_visible(self, selector, link_text=None, index=0, wait=15):
-        self.logger.info("Wait for visible element: {}".format(selector))
-        return WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index, link_text)))
+    # @allure.step("Ждем появление элемента: {selector}")
+    # def _wait_for_visible(self, selector, link_text=None, index=0, wait=15):
+    #     self.logger.info("Wait for visible element: {}".format(selector))
+    #     return WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index, link_text)))
+
+    def _wait_for_visible(self, selector, index=0, wait=15):
+        try:
+            WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index)))
+            return self
+        except TimeoutException:
+            allure.attach(
+                body=self.driver.get_screenshot_as_png(),
+                name='screenshot_image',
+                attachment_type=allure.attachment_type.PNG)
+            raise TimeoutException
 
     @allure.step("Ждем состояние clickable элемента: {selector}")
     def _wait_to_be_clickable(self, selector, link_text=None, index=0, wait=10):
