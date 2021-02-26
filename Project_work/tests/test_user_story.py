@@ -11,7 +11,8 @@ import allure
 import time
 
 
-@allure.feature('OpenCart User')
+@allure.feature('OpenCart customer')
+@allure.story('Регистрация customer')
 @allure.title('Регистрация нового юзера')
 def test_user_registration(browser):
     UserPage(browser).go_to()
@@ -26,7 +27,8 @@ def test_user_registration(browser):
     assert text_has_been_created == 'Your Account Has Been Created!'
 
 
-@allure.feature('OpenCart User')
+@allure.feature('OpenCart customer')
+@allure.story('Сustomer существует')
 @allure.title('Тест, что юзер с такими e-mail уже существует')
 def test_user_failed_registration(browser):
     UserPage(browser).go_to()
@@ -41,7 +43,8 @@ def test_user_failed_registration(browser):
     assert text_address_is_already_registered == 'Warning: E-Mail Address is already registered!'
 
 
-@allure.feature('OpenCart User')
+@allure.feature('OpenCart customer')
+@allure.story('Логин и разлогин customer')
 @allure.title('Логин и разлогин юзера')
 def test_login_logout(browser):
     UserPage(browser).go_to()
@@ -58,7 +61,8 @@ def test_login_logout(browser):
     assert text_account_logout == 'Account Logout'
 
 
-@allure.feature('OpenCart User')
+@allure.feature('OpenCart customer')
+@allure.story('Адрес customer')
 @allure.title('Добавляем новый адрес юзера')
 def test_new_address(browser):
     UserPage(browser).go_to()
@@ -73,7 +77,8 @@ def test_new_address(browser):
     assert text_successfully_added == 'Your address has been successfully added'
 
 
-@allure.feature('OpenCart User')
+@allure.feature('OpenCart customer')
+@allure.story('Удаление customer')
 @allure.title('Удаление покупателя из БД магазина')
 def test_admin_page_delete_customers(browser):
     AdminPage(browser).go_to()
@@ -83,71 +88,6 @@ def test_admin_page_delete_customers(browser):
     CustomersPage(browser).check_click()
     AdminPage(browser).click_del_button()
 
-
-# @allure.feature('OpenCart')
-# @allure.title('Добавление нового products')
-# def test_admin_page_add_products(browser):
-#     AdminPage(browser).go_to()
-#     AdminPage(browser).login_user()
-#     ProductsPage(browser).open_products()
-#     AdminPage(browser).click_add_button()
-#     ProductsPage(browser).input_data_products('Apple_product_name', 'Apple_tag_title', 'Apple_model')
-#     AdminPage(browser).click_save_button()
-#
-#
-# @allure.feature('OpenCart')
-# @allure.title('Удаление products - Apple_product_name')
-# def test_admin_page_delete_products(browser):
-#     AdminPage(browser).go_to()
-#     AdminPage(browser).login_user()
-#     ProductsPage(browser).open_products()
-#     ProductsPage(browser).find_table_products()
-#     ProductsPage(browser).check_click()
-#     AdminPage(browser).click_del_button()
-#
-#
-# @allure.feature('OpenCart')
-# @allure.title('Добавление новой options')
-# def test_admin_page_add_options(browser):
-#     AdminPage(browser).go_to()
-#     AdminPage(browser).login_user()
-#     OptionsPage(browser).open_options()
-#     AdminPage(browser).click_add_button()
-#     OptionsPage(browser).input_data_option('Option_Name_date', 'Date', '123')
-#     AdminPage(browser).click_save_button()
-#
-#
-# @allure.feature('OpenCart')
-# @allure.title('Удаление options - Option_Name_date')
-# def test_admin_page_delete_options(browser):
-#     AdminPage(browser).go_to()
-#     AdminPage(browser).login_user()
-#     OptionsPage(browser).open_options()
-#     OptionsPage(browser).find_table_options()
-#     OptionsPage(browser).check_click()
-#     AdminPage(browser).click_del_button()
-#
-#
-# @allure.feature('OpenCart')
-# @allure.title('Добавление новой Manufacturers')
-# def test_admin_page_add_manufacturers(browser):
-#     AdminPage(browser).go_to()
-#     AdminPage(browser).login_user()
-#     ManufacturersPage(browser).open_manufacturers()
-#     AdminPage(browser).click_add_button()
-#     ManufacturersPage(browser).input_data_manufacturers('Manufacturers_Name')
-#     AdminPage(browser).click_save_button()
-#
-#
-# @allure.feature('OpenCart')
-# @allure.title('Удаление Manufacturers - Manufacturers_Name')
-# def test_admin_page_delete_manufacturers(browser):
-#     AdminPage(browser).go_to()
-#     AdminPage(browser).login_user()
-#     ManufacturersPage(browser).open_manufacturers()
-#     ManufacturersPage(browser).find_table_manufacturers()
-#     ManufacturersPage(browser).check_click()
-#     AdminPage(browser).click_del_button()
 
 str_menu_user = 'My Account\nEdit Account\nPassword\nAddress Book\nWish List\nOrder History\nDownloads\nRecurring ' \
                 'payments\nReward Points\nReturns\nTransactions\nNewsletter\nLogout'
