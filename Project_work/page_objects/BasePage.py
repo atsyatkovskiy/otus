@@ -16,21 +16,7 @@ class BasePage:
         # self.base_url = "https://localhost/admin/"
         self.logger = logging.getLogger(type(self).__name__)
 
-    # @allure.step("Поиск элемента: {selector}")
-    # def _element(self, selector: dict = None, index: int = 0, link_text: str = None):
-    #     self.logger.info("Find element: {}".format(selector))
-    #     by = None
-    #     if link_text:
-    #         by = By.LINK_TEXT
-    #         selector = link_text
-    #     elif 'css' in selector.keys():
-    #         by = By.CSS_SELECTOR
-    #         selector = selector['css']
-    #     elif 'xpath':
-    #         by = By.XPATH
-    #     return self.driver.find_elements(by, selector)[index]
-
-    # @allure.step("Поиск элемента: {selector}")
+    @allure.step("Поиск элемента: {selector}")
     def _element(self, selector: dict = None, index: int = 0, link_text: str = None):
         self.logger.info("Find element: {}".format(selector))
         by = None
@@ -42,15 +28,7 @@ class BasePage:
             selector = selector['css']
         elif 'xpath':
             by = By.XPATH
-        # return self.driver.find_elements(by, selector)[index]
-        with allure.step("Поиск элемента"):
-            try:
-                return self.driver.find_elements(by, selector)[index]
-            except NoSuchElementException as e:
-                allure.attach(body=self.driver.get_screenshot_as_png(),
-                              name="screenshot_image",
-                              attachment_type=allure.attachment_type.PNG)
-                raise AssertionError(e.msg)
+        return self.driver.find_elements(by, selector)[index]
 
     @allure.step("Поиск элемента checkbox в таблице: {selector}")
     def _find_element_checkbox_in_table(self, selector: dict, value_text: str):
