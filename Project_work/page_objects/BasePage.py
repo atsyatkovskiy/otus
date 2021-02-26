@@ -81,14 +81,8 @@ class BasePage:
         self.logger.info("Wait for visible element: {}".format(selector))
         return WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index, link_text)))
 
-    # @allure.step("Ждем появление элемента: {selector}")
-    # def _presence_of_element_located(self, selector, wait=10):
-    #     ABS = By.CSS_SELECTOR
-    #     selector_css = selector['css']
-    #     return WebDriverWait(self.driver, wait).until(EC.presence_of_element_located((ABS, selector_css)))
-
     @allure.step("Ждем состояние clickable элемента: {selector}")
-    def _wait_to_be_clickable(self, selector, link_text=None, index=0, wait=5):
+    def _wait_to_be_clickable(self, selector, link_text=None, index=0, wait=10):
         self.logger.info("Wait to be clickable element: {}".format(selector))
         return WebDriverWait(self.driver, wait).until(EC.element_to_be_clickable(self._element(selector, index, link_text)))
 

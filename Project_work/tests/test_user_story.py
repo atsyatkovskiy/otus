@@ -6,6 +6,7 @@ sys.path.insert(0, parentdir)
 
 from page_objects.AdminPage import AdminPage
 from page_objects.UserPage import UserPage
+from page_objects.CustomersPage import CustomersPage
 import allure
 import time
 
@@ -72,17 +73,17 @@ def test_new_address(browser):
     assert text_successfully_added == 'Your address has been successfully added'
 
 
-# @allure.feature('OpenCart')
-# @allure.title('Удаление categories - Apple_category_name')
-# def test_admin_page_delete_categories(browser):
-#     AdminPage(browser).go_to()
-#     AdminPage(browser).login_user()
-#     CategoriesPage(browser).open_categories()
-#     CategoriesPage(browser).find_table_categories()
-#     CategoriesPage(browser).check_click()
-#     AdminPage(browser).click_del_button()
-#
-#
+@allure.feature('OpenCart User')
+@allure.title('Удаление покупателя из БД магазина')
+def test_admin_page_delete_customers(browser):
+    AdminPage(browser).go_to()
+    AdminPage(browser).login_user()
+    CustomersPage(browser).open_customers()
+    CustomersPage(browser).find_table_customers()
+    CustomersPage(browser).check_click()
+    AdminPage(browser).click_del_button()
+
+
 # @allure.feature('OpenCart')
 # @allure.title('Добавление нового products')
 # def test_admin_page_add_products(browser):
