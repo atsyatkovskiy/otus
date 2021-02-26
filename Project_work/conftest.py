@@ -94,6 +94,11 @@ def browser(request):
     else:
         raise Exception(f"{request.param} is not supported!")
     # Предварительная настройка запуска
+    allure.attach(
+        name=driver.session_id,
+        body=json.dumps(driver.desired_capabilities),
+        attachment_type=allure.attachment_type.JSON)
+
     driver.maximize_window()
     logger.info("Browser {} started with {}".format(browser, driver.desired_capabilities))
 
