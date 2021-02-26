@@ -63,21 +63,21 @@ class BasePage:
         confirm = self.driver.switch_to.alert
         confirm.accept()
 
-    # @allure.step("Нажимаем на элемент: {selector}")
-    # def _click(self, selector, index=0):
-    #     self.logger.info("Clicking element: {}".format(selector))
-    #     ActionChains(self.driver).move_to_element(self._element(selector, index)).click().perform()
+    @allure.step("Нажимаем на элемент: {selector}")
+    def _click(self, selector, index=0):
+        self.logger.info("Clicking element: {}".format(selector))
+        ActionChains(self.driver).move_to_element(self._element(selector, index)).click().perform()
 
-    def _click(self, selector, index=0, wait=15):
-        try:
-            WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index))).click()
-            return self
-        except TimeoutException:
-            allure.attach(
-                body=self.driver.get_screenshot_as_png(),
-                name='screenshot_image',
-                attachment_type=allure.attachment_type.PNG)
-            raise TimeoutException
+    # def _click(self, selector, index=0, wait=15):
+    #     try:
+    #         WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index))).click()
+    #         return self
+    #     except TimeoutException:
+    #         allure.attach(
+    #             body=self.driver.get_screenshot_as_png(),
+    #             name='screenshot_image',
+    #             attachment_type=allure.attachment_type.PNG)
+    #         raise TimeoutException
 
     @allure.step("Вводим значение {value}, в поле input - {selector}")
     def _input(self, selector, value, index=0):
@@ -86,21 +86,21 @@ class BasePage:
         element.clear()
         element.send_keys(value)
 
-    # @allure.step("Ждем появление элемента: {selector}")
-    # def _wait_for_visible(self, selector, link_text=None, index=0, wait=15):
-    #     self.logger.info("Wait for visible element: {}".format(selector))
-    #     return WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index, link_text)))
-
+    @allure.step("Ждем появление элемента: {selector}")
     def _wait_for_visible(self, selector, link_text=None, index=0, wait=15):
-        try:
-            WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index, link_text)))
-            return self
-        except TimeoutException:
-            allure.attach(
-                body=self.driver.get_screenshot_as_png(),
-                name='screenshot_image',
-                attachment_type=allure.attachment_type.PNG)
-            raise TimeoutException
+        self.logger.info("Wait for visible element: {}".format(selector))
+        return WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index, link_text)))
+
+    # def _wait_for_visible(self, selector, link_text=None, index=0, wait=15):
+    #     try:
+    #         WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index, link_text)))
+    #         return self
+    #     except TimeoutException:
+    #         allure.attach(
+    #             body=self.driver.get_screenshot_as_png(),
+    #             name='screenshot_image',
+    #             attachment_type=allure.attachment_type.PNG)
+    #         raise TimeoutException
 
     @allure.step("Ждем состояние clickable элемента: {selector}")
     def _wait_to_be_clickable(self, selector, link_text=None, index=0, wait=10):
