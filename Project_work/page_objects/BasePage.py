@@ -77,7 +77,7 @@ class BasePage:
         element.send_keys(value)
 
     @allure.step("Ждем появление элемента: {selector}")
-    def _wait_for_visible(self, selector, link_text=None, index=0, wait=10):
+    def _wait_for_visible(self, selector, link_text=None, index=0, wait=15):
         self.logger.info("Wait for visible element: {}".format(selector))
         return WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index, link_text)))
 
@@ -87,9 +87,9 @@ class BasePage:
         return WebDriverWait(self.driver, wait).until(EC.element_to_be_clickable(self._element(selector, index, link_text)))
 
     @allure.step("Получаем текст элемента: {selector}")
-    def _get_element_text(self, selector):
+    def _get_element_text(self, selector, index=0):
         self.logger.info("Get element text: {}".format(selector))
-        return self._element(selector).text
+        return self._element(selector, index).text
 
     @allure.step("Открываем url: {url}")
     def _go_to(self, url):
