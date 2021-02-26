@@ -63,21 +63,22 @@ class BasePage:
         confirm = self.driver.switch_to.alert
         confirm.accept()
 
-    @allure.step("Нажимаем на элемент: {selector}")
-    def _click(self, selector, index=0):
-        self.logger.info("Clicking element: {}".format(selector))
-        ActionChains(self.driver).move_to_element(self._element(selector, index)).click().perform()
+    # @allure.step("Нажимаем на элемент: {selector}")
+    # def _click(self, selector, index=0):
+    #     self.logger.info("Clicking element: {}".format(selector))
+    #     ActionChains(self.driver).move_to_element(self._element(selector, index)).click().perform()
 
-    # def _click(self, selector, index=0, wait=15):
-    #     try:
-    #         WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index))).click()
-    #         return self
-    #     except TimeoutException:
-    #         allure.attach(
-    #             body=self.driver.get_screenshot_as_png(),
-    #             name='screenshot_image',
-    #             attachment_type=allure.attachment_type.PNG)
-    #         raise TimeoutException
+    @allure.step("Нажимаем на элемент: {selector}")
+    def _click(self, selector, index=0, wait=15):
+        try:
+            WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index))).click()
+            return self
+        except TimeoutException:
+            allure.attach(
+                body=self.driver.get_screenshot_as_png(),
+                name='screenshot_image',
+                attachment_type=allure.attachment_type.PNG)
+            raise TimeoutException
 
     @allure.step("Вводим значение {value}, в поле input - {selector}")
     def _input(self, selector, value, index=0):
