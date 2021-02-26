@@ -45,7 +45,7 @@ class BasePage:
         # return self.driver.find_elements(by, selector)[index]
         with allure.step("Поиск элемента"):
             try:
-                self.driver.find_element_by_css_selector("no-such-selector")
+                return self.driver.find_elements(by, selector)[index]
             except NoSuchElementException as e:
                 allure.attach(body=self.driver.get_screenshot_as_png(),
                               name="screenshot_image",
