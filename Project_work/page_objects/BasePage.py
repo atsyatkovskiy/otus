@@ -91,9 +91,9 @@ class BasePage:
     #     self.logger.info("Wait for visible element: {}".format(selector))
     #     return WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index, link_text)))
 
-    def _wait_for_visible(self, selector, index=0, wait=15):
+    def _wait_for_visible(self, selector, link_text=None, index=0, wait=15):
         try:
-            WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index)))
+            WebDriverWait(self.driver, wait).until(EC.visibility_of(self._element(selector, index, link_text)))
             return self
         except TimeoutException:
             allure.attach(
