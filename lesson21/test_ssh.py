@@ -24,6 +24,7 @@ def get_time_started_container(name_container):
     return time_started_container
 
 
+# Тест на restart opencart, проврека по времени старта контейнера
 def test_restart_opencart(param_name_opencart):
 
     # Выполняем подключеение по ssh
@@ -44,6 +45,7 @@ def test_restart_opencart(param_name_opencart):
     ssh_close()
 
 
+# Тест на restart opencart, проврека по времени старта контейнера
 def test_restart_db(param_name_db):
 
     # Выполняем подключеение по ssh
