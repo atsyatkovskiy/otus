@@ -6,7 +6,7 @@ from methods import APIClient
 def pytest_addoption(parser):
     parser.addoption(
         "--url",
-        default="https://jsonplaceholder.typicode.com/",
+        default="https://api.openbrewerydb.org/",
         help="Введите url"
     )
 

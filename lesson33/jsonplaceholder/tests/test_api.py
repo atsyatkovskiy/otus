@@ -21,7 +21,7 @@ def test_api_delete(mock_request, api_client):
 def test_posts_get(mock_request, api_client, input_id):
     mock_request.return_value = Mock(status_code=200)
     mock_request.return_value.json.return_value = {'id': input_id}
-    res = APIClient.get(api_client, "/posts" + str(input_id),  input_id)
+    res = APIClient.get(api_client, "/posts" + str(input_id))
     assert res.json()['id'] == int(input_id)
     assert res.status_code == 200, "Status code is not 200"
 
@@ -39,6 +39,7 @@ def test_api_post_request(mock_request, api_client, input_userid, input_title):
     assert res.json()['title'] == input_title
     assert res.json()['body'] == 'bar'
     assert res.json()['userId'] == input_userid
+    assert res.status_code == 200, "Status code is not 200"
 
 
 # Параметр фильтрации фото по Id альбома
@@ -47,11 +48,11 @@ def test_api_post_request(mock_request, api_client, input_userid, input_title):
 @patch('methods.APIClient.get')
 @pytest.mark.parametrize('albumid', [101, 0, -6, 273])
 def test_api_empty_response(mock_request, api_client, albumid):
-    # res = api_client.get(path="/photos", params={'albumId': albumid})
     data_json = {'albumId': albumid}
     res_data = []
     mock_request.return_value = Mock(status_code=200)
     mock_request.return_value.json.return_value = res_data
     res = APIClient.get(api_client, "/posts", data_json)
     # Проверяем что на таких данных нет, ответ пустой
+    assert res.status_code == 200, "Status code is not 200"
     assert res.json() == []
